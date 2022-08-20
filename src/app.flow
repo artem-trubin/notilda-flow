@@ -4,14 +4,26 @@ export {
   makeApp() -> Material;
 }
 
+makeHeader(leftNavExpander : DynamicBehaviour<bool>) -> MAppBar {
+  title = MText("Notilda", []);
+  rightElems = [];
+  style = [];
+
+  toolBar = MToolbar(leftNavExpander, title, rightElems, style);
+
+  MAppBar(toolBar);
+}
+
 makeApp() -> Material {
-  topBar = MAppBar(MText("This is top bar", []));
+  leftNavExpander = make(false);
+
+  header = makeHeader(leftNavExpander);
   leftNav = MLeftNav(
     MText("This is left nav", []),
-    make(true),
+    leftNavExpander,
     []
   );
   content = MContent(MText("This is content", []));
 
-  MAppStructure([topBar, leftNav, content], []);
+  MAppStructure([header, leftNav, content], []);
 }
