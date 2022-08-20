@@ -1,0 +1,10 @@
+import material/material2tropic;
+import src/app;
+
+main() {
+  manager = makeMaterialManager([]);
+
+  app = makeApp();
+
+  mrender(manager, false, app);
+}

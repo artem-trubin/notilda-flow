@@ -1,0 +1,16 @@
+import material/material;
+
+export {
+  makeApp() -> Material;
+}
+
+makeApp() -> Material {
+  topBar = MAppBar(MText("This is top bar", []));
+  leftNav = MLeftNav(
+    MText("This is left nav", []),
+    make(true),
+    []
+  );
+
+  MAppStructure([topBar, leftNav], []);
+}
