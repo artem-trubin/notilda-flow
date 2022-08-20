@@ -11,6 +11,7 @@ makeApp() -> Material {
     make(true),
     []
   );
+  content = MContent(MText("This is content", []));
 
-  MAppStructure([topBar, leftNav], []);
+  MAppStructure([topBar, leftNav, content], []);
 }
