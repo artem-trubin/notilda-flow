@@ -1,5 +1,7 @@
 import material/material;
 
+import src/notes;
+
 export {
   makeApp() -> Material;
 }
@@ -26,12 +28,18 @@ makeSideNav(sideNavExpander : DynamicBehaviour<bool>) -> MLeftNav {
 
 
 makeApp() -> Material {
+  notes = createMockNotes();
+
   sideNavExpander = make(false);
 
   header = makeHeader(sideNavExpander);
   sideNav = makeSideNav(sideNavExpander);
 
-  content = MContent(MText("This is content", []));
+  content = MContent(
+    MLinesA(map(notes, \note -> {
+      MText(note.text, [])
+    }))
+  );
 
   MAppStructure([header, sideNav, content], []);
 }

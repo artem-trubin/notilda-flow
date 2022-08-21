@@ -1,0 +1,30 @@
+import math/crypto;
+
+export {
+  Note(
+    id : string,
+    text : string,
+  );
+
+  makeNote(text : string) -> Note;
+  editNote(note : Note, newText : string) -> Note;
+  createMockNotes() -> [Note];
+}
+
+makeNote(text : string) -> Note {
+  newId = generateUID("", "", 16);
+
+  Note(newId, text)
+}
+
+editNote(note : Note, newText : string) -> Note {
+  Note(note with text = newText)
+}
+
+createMockNotes() -> [Note] {
+  [
+    makeNote("Test note"),
+    makeNote("Second test note"),
+    makeNote("Third test note"),
+  ]
+}
