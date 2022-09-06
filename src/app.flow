@@ -1,6 +1,7 @@
 import material/material;
 
 import src/notes;
+import src/fab;
 
 export {
   makeApp() -> Material;
@@ -9,7 +10,9 @@ export {
 makeHeader(sideNavExpander : DynamicBehaviour<bool>) -> MAppBar {
   title = MText("Notilda", []);
   rightElems = [];
-  style = [];
+  style = [
+    makeFab()
+  ];
 
   toolBar = MToolbar(sideNavExpander, title, rightElems, style);
 
@@ -26,7 +29,6 @@ makeSideNav(sideNavExpander : DynamicBehaviour<bool>) -> MLeftNav {
   MLeftNav(content, sideNavExpander, [])
 }
 
-
 makeApp() -> Material {
   notes = createMockNotes();
 
@@ -36,9 +38,7 @@ makeApp() -> Material {
   sideNav = makeSideNav(sideNavExpander);
 
   content = MContent(
-    MLinesA(map(notes, \note -> {
-      MText(note.text, [])
-    }))
+    MLinesA(notes)
   );
 
   MAppStructure([header, sideNav, content], []);
