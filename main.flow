@@ -1,10 +1,11 @@
 import material/material2tropic;
 import src/app;
+import src/state;
 
 main() {
-  manager = makeMaterialManager([]);
+  state = makeInitialState();
 
-  app = makeApp();
+  app = makeApp(state);
 
-  mrender(manager, false, app);
+  mrender(state.manager, false, app);
 }

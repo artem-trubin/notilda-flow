@@ -1,25 +1,28 @@
 import material/material;
 
+import src/notes;
+
 export {
-  makeFab() -> MFloatingButton;
+  makeFab(manager : MaterialManager) -> MFloatingButton;
 }
 
-makeFab() -> MFloatingButton {
+makeFab(manager : MaterialManager) -> MFloatingButton {
   icon = "add";
-  style = [MBottom(), MRight(), makeFabSpeedDial()];
+  style = [MBottom(), MRight(), makeFabSpeedDial(manager)];
   state = [];
 
   MFloatingButton(icon, style, state)
 }
 
-makeFabSpeedDial() -> MFabSpeedDial {
+makeFabSpeedDial(manager : MaterialManager) -> MFabSpeedDial {
   label = "Close";
   style = [];
 
   createNewNoteBtn = MFabIconButton(
     "note_add",
     "Create Note",
-    \ -> println("Note Created"),
+    // \ -> makeAddNoteDialog(manager),
+    \ -> {},
     []
   );
 

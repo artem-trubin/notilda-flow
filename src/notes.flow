@@ -1,5 +1,8 @@
-import math/crypto;
 import material/material;
+import material/material_dialog;
+import math/crypto;
+
+// import src/state;
 
 export {
   Note(
@@ -7,19 +10,46 @@ export {
     text : string,
   );
 
-  makeNote(text : string) -> Note;
-  editNote(note : Note, newText : string) -> Note;
-  createMockNotes() -> [Material];
-  makeNoteMaterial(note : Note) -> Material;
+  addNote(
+    text : string,
+    onDone : (Note) -> void
+  ) -> void;
+  editNote(
+    note : Note,
+    newText : string,
+    onDone : (Note) -> void,
+  ) -> void;
+
+  makeNoteCard(note : Note) -> MCard;
+  // makeAddNoteDialog(state : State) -> void;
 }
 
-makeNote(text : string) -> Note {
+addNote(
+  text : string,
+  onDone : (Note) -> void
+) -> void {
   newId = generateUID("", "", 16);
 
-  Note(newId, text)
+  // Here should be code that creates a Note in the database
+  // It should call the onDone callback when it gets OK
+  // response from the query.
+
+  note = Note(newId, text);
+
+  onDone(note)
 }
 
-makeNoteMaterial(note : Note) -> Material {
+editNote(
+  note : Note,
+  newText : string,
+  onDone : (Note) -> void
+) -> void {
+  newNote = Note(note with text = newText);
+
+  onDone(newNote)
+}
+
+makeNoteCard(note : Note) -> MCard {
   noteText = MSupportingTextBlock(
     note.text,
     []
@@ -32,16 +62,35 @@ makeNoteMaterial(note : Note) -> Material {
   MCard(blocks, style, state)
 }
 
-editNote(note : Note, newText : string) -> Note {
-  Note(note with text = newText)
-}
+// makeAddNoteDialog(state : State) -> void {
+//   closeWhenB = make(false);
 
-createMockNotes() -> [Material] {
-  notes = [
-    makeNote("Test note"),
-    makeNote("Second test note"),
-    makeNote("Third test note"),
-  ];
+//   addNewNoteButton = MTextButton(
+//     "Create",
+//     \ -> {
+//       makeNote("Some text");
+//       next(closeWhenB, true);
+//     },
+//     [],
+//     []
+//   )
 
-  map(notes, \note -> makeNoteMaterial(note))
-}
+//   actions = [
+//     addNewNoteButton,
+//     MTextButton("Cancel", \ -> { next(closeWhenB, true) }, [], []),
+//   ];
+
+//   style = [
+//     MDialogUseFrame(),
+//     MDialogTitle("Create New Note"),
+//     MDialogActions(actions)
+//   ];
+//   content = MText("Test", []);
+
+//   ShowMDialog(
+//     manager,
+//     closeWhenB,
+//     style,
+//     content
+//   )
+// }

@@ -2,16 +2,20 @@ import material/material;
 
 import src/notes;
 import src/fab;
+import src/state;
 
 export {
-  makeApp() -> Material;
+  makeApp(state : State) -> Material;
 }
 
-makeHeader(sideNavExpander : DynamicBehaviour<bool>) -> MAppBar {
+makeHeader(
+  manager : MaterialManager,
+  sideNavExpander : DynamicBehaviour<bool>
+) -> MAppBar {
   title = MText("Notilda", []);
   rightElems = [];
   style = [
-    makeFab()
+    makeFab(manager)
   ];
 
   toolBar = MToolbar(sideNavExpander, title, rightElems, style);
@@ -29,17 +33,29 @@ makeSideNav(sideNavExpander : DynamicBehaviour<bool>) -> MLeftNav {
   MLeftNav(content, sideNavExpander, [])
 }
 
-makeApp() -> Material {
-  notes = createMockNotes();
+makeApp(state : State) -> Material {
+  mockTextForNotes = [
+    "Test note",
+    "Second test note",
+    "Third super test note",
+  ];
+
+  addNoteToState = \note -> {
+    dynArrayPush(state.notesB, note)
+  };
+
+  iter(mockTextForNotes, \text -> {
+    addNote(text, addNoteToState)
+  });
 
   sideNavExpander = make(false);
 
-  header = makeHeader(sideNavExpander);
+  header = makeHeader(state.manager, sideNavExpander);
   sideNav = makeSideNav(sideNavExpander);
 
-  content = MContent(
-    MLinesA(notes)
-  );
+  content = MContent(MSelect(state.notesB, \notes -> {
+    MLines(map(notes, \note -> makeNoteCard(note)))
+  }));
 
   MAppStructure([header, sideNav, content], []);
 }
