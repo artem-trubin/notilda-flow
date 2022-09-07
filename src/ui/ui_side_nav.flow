@@ -1,0 +1,14 @@
+import material/material;
+
+export {
+  makeSideNav(sideNavExpander : DynamicBehaviour<bool>) -> MLeftNav;
+}
+
+makeSideNav(sideNavExpander : DynamicBehaviour<bool>) -> MLeftNav {
+  header = MSNSmallHead([MText("This is side nav", [])]);
+  list = MText("This will be list", []);
+  style = [];
+
+  content = MSideNav(header, list, sideNavExpander, style);
+  MLeftNav(content, sideNavExpander, [])
+};

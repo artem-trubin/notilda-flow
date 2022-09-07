@@ -1,52 +1,9 @@
 import material/material;
-import material/material_dialog;
-import math/crypto;
 
-// import src/state;
+import src/data/data_structs;
 
 export {
-  Note(
-    id : string,
-    text : string,
-  );
-
-  addNote(
-    text : string,
-    onDone : (Note) -> void
-  ) -> void;
-  editNote(
-    note : Note,
-    newText : string,
-    onDone : (Note) -> void,
-  ) -> void;
-
   makeNoteCard(note : Note) -> MCard;
-  // makeAddNoteDialog(state : State) -> void;
-}
-
-addNote(
-  text : string,
-  onDone : (Note) -> void
-) -> void {
-  newId = generateUID("", "", 16);
-
-  // Here should be code that creates a Note in the database
-  // It should call the onDone callback when it gets OK
-  // response from the query.
-
-  note = Note(newId, text);
-
-  onDone(note)
-}
-
-editNote(
-  note : Note,
-  newText : string,
-  onDone : (Note) -> void
-) -> void {
-  newNote = Note(note with text = newText);
-
-  onDone(newNote)
 }
 
 makeNoteCard(note : Note) -> MCard {
@@ -56,11 +13,9 @@ makeNoteCard(note : Note) -> MCard {
   );
 
   blocks = [noteText];
-  style = [];
-  state = [];
 
   MCard(blocks, style, state)
-}
+};
 
 // makeAddNoteDialog(state : State) -> void {
 //   closeWhenB = make(false);

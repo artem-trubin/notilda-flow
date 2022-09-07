@@ -1,0 +1,11 @@
+export {
+  Note(
+    id : string,
+    text : string,
+  );
+}
+
+Note(
+  id : string,
+  text : string,
+);
