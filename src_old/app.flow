@@ -1,0 +1,36 @@
+import material/material;
+
+import src/notes;
+import src/fab;
+import src/state;
+
+export {
+  makeApp(state : State) -> Material;
+}
+
+makeApp(state : State) -> Material {
+  mockTextForNotes = [
+    "Test note",
+    "Second test note",
+    "Third super test note",
+  ];
+
+  addNoteToState = \note -> {
+    dynArrayPush(state.notesB, note)
+  };
+
+  iter(mockTextForNotes, \text -> {
+    addNote(text, addNoteToState)
+  });
+
+  sideNavExpander = make(false);
+
+  header = makeHeader(state.manager, sideNavExpander);
+  sideNav = makeSideNav(sideNavExpander);
+
+  content = MContent(MSelect(state.notesB, \notes -> {
+    MLines(map(notes, \note -> makeNoteCard(note)))
+  }));
+
+  MAppStructure([header, sideNav, content], []);
+}

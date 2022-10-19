@@ -1,0 +1,18 @@
+import material/material_manager;
+
+import src/notes;
+
+export {
+  State(
+    manager : MaterialManager,
+    notesB : DynamicBehaviour<[Note]>,
+  );
+  makeInitialState() -> State;
+}
+
+
+makeInitialState() -> State {
+  manager = makeMaterialManager([]);
+
+  State(manager, make([]))
+}
