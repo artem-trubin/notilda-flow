@@ -1,0 +1,13 @@
+export {
+  User(
+    id : string,
+    name : string,
+    password : string,
+  );
+}
+
+User(
+  id : string,
+  name : string,
+  password : string,
+);

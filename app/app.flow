@@ -1,7 +1,7 @@
 import material/material;
 
-import note;
-import editor;
+import app/note/note;
+import app/editor;
 
 export {
   makeApp() -> MAppStructure;
