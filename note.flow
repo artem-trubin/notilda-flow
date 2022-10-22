@@ -13,7 +13,11 @@ export {
     onDone : (Note) -> void,
   ) -> MTextButton;
 
-  makeNoteCard(note : Note, deleteCard : (noteId : string) -> void) -> MCard;
+  makeNoteCard(
+    note : Note,
+    deleteCard : (noteId : string) -> void,
+    startEditingCard : (noteId : string) -> void,
+  ) -> MCard;
 }
 
 Note(
@@ -21,14 +25,20 @@ Note(
   text : string,
 );
 
-makeNoteCard(note : Note, deleteCard : (noteId : string) -> void) -> MCard {
+makeNoteCard(
+  note : Note,
+  deleteCard : (noteId : string) -> void,
+  startEditingCard : (noteId : string) -> void,
+) -> MCard {
   noteText = MSupportingTextBlock(
     note.text,
     []
   );
 
   noteButtons = MActionBlock(
-    [],
+    [
+      MTextButton("Edit", \ -> startEditingCard(note.id), [], [])
+    ],
     [
       MTextButton("Delete", \ -> deleteCard(note.id), [], [])
     ],

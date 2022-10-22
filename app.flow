@@ -8,6 +8,9 @@ export {
 }
 
 makeApp() -> MAppStructure {
+
+  // Initial work with data
+
   mockTextForNotes = [
     "Test note",
     "Second test note",
@@ -20,6 +23,10 @@ makeApp() -> MAppStructure {
       \noteText -> Note(makeNoteId(), noteText)
     )
   );
+
+  currentNoteMB : DynamicBehaviour<Maybe<Note>> = make(None());
+
+  // Note functions
 
   addNote = \note : Note -> {
     next(notesB, arrayPush(getValue(notesB), note))
@@ -35,9 +42,42 @@ makeApp() -> MAppStructure {
     )
   };
 
+  startEditingNote = \noteId : string -> {
+    noteToEditM = find(getValue(notesB), \note -> note.id == noteId);
+
+    eitherFn(
+      noteToEditM,
+      \noteToEdit -> {
+        next(currentNoteMB, Some(noteToEdit))
+      },
+      \ -> println("Error: can't find not with such ID")
+    )
+  };
+
+  saveNote = \updatedNote : Note -> {
+    next(
+      notesB,
+      map(
+        getValue(notesB),
+        \note -> if (note.id == updatedNote.id) updatedNote else note
+      )
+    )
+  };
+
+  // UI elements
+
   notesList = MSelect(
     notesB,
-    \notes -> MLines(map(notes, \note -> makeNoteCard(note, deleteNote)))
+    \notes -> MLines(
+      map(
+        notes,
+        \note -> makeNoteCard(
+          note,
+          deleteNote,
+          startEditingNote,
+        )
+      )
+    )
   );
 
   content = MContent(
@@ -46,7 +86,7 @@ makeApp() -> MAppStructure {
         notesList,
         AddNoteButton(addNote),
       ]),
-      NoteEditor(),
+      NoteEditor(currentNoteMB, saveNote),
     ])
   );
 
