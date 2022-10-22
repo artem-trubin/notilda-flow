@@ -1,0 +1,61 @@
+import math/crypto;
+import material/material2tropic;
+
+export {
+  Note(
+    id : string,
+    text : string,
+  );
+
+  makeNoteId() -> string;
+
+  AddNoteButton(
+    onDone : (Note) -> void,
+  ) -> MTextButton;
+}
+
+Note(
+  id : string,
+  text : string,
+);
+
+makeNoteCard(note : Note) -> MCard {
+  noteText = MSupportingTextBlock(
+    note.text,
+    []
+  );
+
+  blocks = [noteText];
+
+  MCard(blocks, [], [])
+}
+
+makeNoteId() -> string {
+  generateUID("", "", 16)
+}
+
+createNote(
+  text : string,
+  onDone : (Note) -> void
+) -> void {
+  newId = makeNoteId();
+  note = Note(newId, text);
+
+  onDone(note)
+}
+
+AddNoteButton(
+  onDone : (Note) -> void,
+) -> MTextButton {
+  MTextButton(
+    "Add Note",
+    \ -> {
+      createNote(
+        "Some default text",
+        onDone
+      )
+    },
+    [],
+    []
+  )
+}

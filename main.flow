@@ -1,6 +1,6 @@
 import material/material2tropic;
 
-import src/app;
+import app;
 
 main() {
   manager = makeMaterialManager([]);

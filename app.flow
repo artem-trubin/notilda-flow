@@ -1,0 +1,45 @@
+import material/material;
+
+import note;
+
+export {
+  makeApp() -> MAppStructure;
+}
+
+makeApp() -> MAppStructure {
+  mockTextForNotes = [
+    "Test note",
+    "Second test note",
+    "Third super ttest note",
+  ];
+
+  notesB : DynamicBehaviour<[Note]> = make(
+    map(
+      mockTextForNotes,
+      \noteText -> Note(makeNoteId(), noteText)
+    )
+  );
+
+  notesList = MSelect(
+    notesB,
+    \notes -> MLines(
+      map(
+        notes,
+        \note -> MText(note.text, [])
+      )
+    )
+  );
+
+  addNote = \note : Note -> {
+    next(notesB, arrayPush(getValue(notesB), note))
+  };
+
+  content = MContent(
+    MLines([
+      notesList,
+      AddNoteButton(addNote)
+    ])
+  );
+
+  MAppStructure([content], []);
+}
