@@ -12,6 +12,8 @@ export {
   AddNoteButton(
     onDone : (Note) -> void,
   ) -> MTextButton;
+
+  makeNoteCard(note : Note, deleteCard : (noteId : string) -> void) -> MCard;
 }
 
 Note(
@@ -19,15 +21,30 @@ Note(
   text : string,
 );
 
-makeNoteCard(note : Note) -> MCard {
+makeNoteCard(note : Note, deleteCard : (noteId : string) -> void) -> MCard {
   noteText = MSupportingTextBlock(
     note.text,
     []
   );
 
-  blocks = [noteText];
+  noteButtons = MActionBlock(
+    [],
+    [
+      MTextButton("Delete", \ -> deleteCard(note.id), [], [])
+    ],
+    []
+  );
 
-  MCard(blocks, [], [])
+  blocks = [
+    noteText,
+    noteButtons,
+  ];
+
+  style = [
+    MCardWidth(256.0),
+  ];
+
+  MCard(blocks, style, [])
 }
 
 makeNoteId() -> string {

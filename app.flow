@@ -20,19 +20,24 @@ makeApp() -> MAppStructure {
     )
   );
 
-  notesList = MSelect(
-    notesB,
-    \notes -> MLines(
-      map(
-        notes,
-        \note -> MText(note.text, [])
-      )
-    )
-  );
-
   addNote = \note : Note -> {
     next(notesB, arrayPush(getValue(notesB), note))
   };
+
+  deleteNote = \noteId : string -> {
+    next(
+      notesB,
+      filter(
+        getValue(notesB),
+        \note -> note.id != noteId
+      )
+    )
+  };
+
+  notesList = MSelect(
+    notesB,
+    \notes -> MLines(map(notes, \note -> makeNoteCard(note, deleteNote)))
+  );
 
   content = MContent(
     MLines([
