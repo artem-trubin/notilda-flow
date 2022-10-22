@@ -1,0 +1,19 @@
+import material/material2tropic;
+
+export {
+  NoteEditor() -> MTextInput;
+}
+
+NoteEditor() -> MTextInput {
+  textB = make("");
+
+  MTextInput(
+    textB,
+    [
+      Multiline(true),
+      MMaxLines(10),
+      MOutlined(),
+    ],
+    []
+  );
+}

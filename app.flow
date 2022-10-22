@@ -1,6 +1,7 @@
 import material/material;
 
 import note;
+import editor;
 
 export {
   makeApp() -> MAppStructure;
@@ -40,9 +41,12 @@ makeApp() -> MAppStructure {
   );
 
   content = MContent(
-    MLines([
-      notesList,
-      AddNoteButton(addNote)
+    MCols([
+      MLines([
+        notesList,
+        AddNoteButton(addNote),
+      ]),
+      NoteEditor(),
     ])
   );
 
