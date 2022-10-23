@@ -1,7 +1,7 @@
 import material/material;
 
 import app/state;
-import app/note/note;
+import app/note;
 import app/editor;
 
 export {

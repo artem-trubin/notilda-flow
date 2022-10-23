@@ -1,6 +1,6 @@
 import material/material2tropic;
 
-import app/note/note;
+import app/note;
 
 export {
   NoteEditor(

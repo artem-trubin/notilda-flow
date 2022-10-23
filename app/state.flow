@@ -1,11 +1,13 @@
-import app/user/user;
-import app/note/note;
+import app/user;
+import app/note;
+import app/page;
 
 export {
   State(
     userM : Maybe<User>,
     notesB : DynamicBehaviour<[Note]>,
     currentNoteMB : DynamicBehaviour<Maybe<Note>>,
+    currentPageB : DynamicBehaviour<Page>,
   );
 
   makeInitialState() -> State;
@@ -15,8 +17,9 @@ State(
   userM : Maybe<User>,
   notesB : DynamicBehaviour<[Note]>,
   currentNoteMB : DynamicBehaviour<Maybe<Note>>,
+  currentPageB : DynamicBehaviour<Page>,
 );
 
 makeInitialState() -> State {
-  State(None(), make([]), make(None()))
+  State(None(), make([]), make(None()), make(PageHome()))
 }
