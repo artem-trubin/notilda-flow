@@ -1,0 +1,22 @@
+import app/user/user;
+import app/note/note;
+
+export {
+  State(
+    userM : Maybe<User>,
+    notesB : DynamicBehaviour<[Note]>,
+    currentNoteMB : DynamicBehaviour<Maybe<Note>>,
+  );
+
+  makeInitialState() -> State;
+}
+
+State(
+  userM : Maybe<User>,
+  notesB : DynamicBehaviour<[Note]>,
+  currentNoteMB : DynamicBehaviour<Maybe<Note>>,
+);
+
+makeInitialState() -> State {
+  State(None(), make([]), make(None()))
+}

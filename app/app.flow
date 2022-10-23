@@ -1,5 +1,6 @@
 import material/material;
 
+import app/state;
 import app/note/note;
 import app/editor;
 
@@ -11,44 +12,42 @@ makeApp() -> MAppStructure {
 
   // Initial work with data
 
+  state = makeInitialState();
+
   mockTextForNotes = [
     "Test note",
     "Second test note",
     "Third super ttest note",
   ];
 
-  notesB : DynamicBehaviour<[Note]> = make(
-    map(
-      mockTextForNotes,
-      \noteText -> Note(makeNoteId(), noteText)
-    )
+  next(
+    state.notesB,
+    map(mockTextForNotes, \noteText -> Note(makeNoteId(), noteText))
   );
-
-  currentNoteMB : DynamicBehaviour<Maybe<Note>> = make(None());
 
   // Note functions
 
   addNote = \note : Note -> {
-    next(notesB, arrayPush(getValue(notesB), note))
+    next(state.notesB, arrayPush(getValue(state.notesB), note))
   };
 
   deleteNote = \noteId : string -> {
     next(
-      notesB,
+      state.notesB,
       filter(
-        getValue(notesB),
+        getValue(state.notesB),
         \note -> note.id != noteId
       )
     )
   };
 
   startEditingNote = \noteId : string -> {
-    noteToEditM = find(getValue(notesB), \note -> note.id == noteId);
+    noteToEditM = find(getValue(state.notesB), \note -> note.id == noteId);
 
     eitherFn(
       noteToEditM,
       \noteToEdit -> {
-        next(currentNoteMB, Some(noteToEdit))
+        next(state.currentNoteMB, Some(noteToEdit))
       },
       \ -> println("Error: can't find not with such ID")
     )
@@ -56,9 +55,9 @@ makeApp() -> MAppStructure {
 
   saveNote = \updatedNote : Note -> {
     next(
-      notesB,
+      state.notesB,
       map(
-        getValue(notesB),
+        getValue(state.notesB),
         \note -> if (note.id == updatedNote.id) updatedNote else note
       )
     )
@@ -67,7 +66,7 @@ makeApp() -> MAppStructure {
   // UI elements
 
   notesList = MSelect(
-    notesB,
+    state.notesB,
     \notes -> MLines(
       map(
         notes,
@@ -86,7 +85,7 @@ makeApp() -> MAppStructure {
         notesList,
         AddNoteButton(addNote),
       ]),
-      NoteEditor(currentNoteMB, saveNote),
+      NoteEditor(state.currentNoteMB, saveNote),
     ])
   );
 
