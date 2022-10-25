@@ -1,7 +1,7 @@
 export {
-  Page ::= PageLogin, PageVault, PageUserProfile, PageHome;
-  PageLogin();
-  PageVault();
-  PageUserProfile();
-  PageHome();
+  PageType ::= PageTypeLogin, PageTypeVault, PageTypeUserProfile, PageTypeHome;
+  PageTypeLogin();
+  PageTypeVault();
+  PageTypeUserProfile();
+  PageTypeHome();
 }
