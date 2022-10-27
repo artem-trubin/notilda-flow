@@ -1,7 +1,20 @@
+import material/material2tropic;
+
 export {
   PageType ::= PageTypeLogin, PageTypeVault, PageTypeUserProfile, PageTypeHome;
   PageTypeLogin();
   PageTypeVault();
   PageTypeUserProfile();
   PageTypeHome();
+
+  makePageHome() -> Material;
+  makePageUserProfile() -> Material;
+}
+
+makePageHome() -> Material {
+  MText("This is a home page", [])
+}
+
+makePageUserProfile() -> Material {
+  MText("This is a user profile page", [])
 }

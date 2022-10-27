@@ -1,20 +1,13 @@
-import material/material;
+import material/material2tropic;
 
 import app/state;
-import app/note;
 import app/editor;
-import app/vault;
 
 export {
-  makeApp() -> MAppStructure;
+  makePageVault(state : State) -> Material;
 }
 
-makeApp() -> MAppStructure {
-
-  // Initial work with data
-
-  state = makeInitialState();
-
+makePageVault(state : State) -> Material {
   mockTextForNotes = [
     "Test note",
     "Second test note",
@@ -80,22 +73,11 @@ makeApp() -> MAppStructure {
     )
   );
 
-  page = makePageVault(state);
-
-  leftNavHeader = MSNSmallHead([MText("Test", [])]);
-  leftNavExpanderB = make(false);
-  leftNav = MLeftNav(
-    MSideNav(
-      MSNSmallHead([MText("This will be header", [])]),
-      MText("This will be list", []),
-      leftNavExpanderB,
-      []
-    ),
-    leftNavExpanderB,
-    []
-  );
-
-  topToolBar = MAppBar(MToolbar(leftNavExpanderB, MText("Notilda", []), [MText("Here will be buttons", [])], []));
-
-  MAppStructure([MContent(page), leftNav, topToolBar], []);
+  MCols([
+    MLines([
+      notesList,
+      AddNoteButton(addNote),
+    ]),
+    NoteEditor(state.currentNoteMB, saveNote),
+  ]);
 }

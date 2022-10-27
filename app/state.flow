@@ -7,7 +7,7 @@ export {
     userM : Maybe<User>,
     notesB : DynamicBehaviour<[Note]>,
     currentNoteMB : DynamicBehaviour<Maybe<Note>>,
-    currentPageB : DynamicBehaviour<Page>,
+    currentPageB : DynamicBehaviour<PageType>,
   );
 
   makeInitialState() -> State;
@@ -17,9 +17,9 @@ State(
   userM : Maybe<User>,
   notesB : DynamicBehaviour<[Note]>,
   currentNoteMB : DynamicBehaviour<Maybe<Note>>,
-  currentPageB : DynamicBehaviour<Page>,
+  currentPageB : DynamicBehaviour<PageType>,
 );
 
 makeInitialState() -> State {
-  State(None(), make([]), make(None()), make(PageHome()))
+  State(None(), make([]), make(None()), make(PageTypeHome()))
 }
