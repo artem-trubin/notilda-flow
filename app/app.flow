@@ -4,6 +4,7 @@ import app/state;
 import app/note;
 import app/editor;
 import app/vault;
+import app/userProfilePage;
 
 export {
   makeApp() -> MAppStructure;
@@ -25,6 +26,8 @@ makeApp() -> MAppStructure {
     state.notesB,
     map(mockTextForNotes, \noteText -> Note(makeNoteId(), noteText))
   );
+
+  leftNavExpanderB = make(false);
 
   // Note functions
 
@@ -80,14 +83,40 @@ makeApp() -> MAppStructure {
     )
   );
 
-  page = makePageVault(state);
+  pageButtonsList = MLines([
+    MTextButton(
+      "Vault",
+      \ -> {
+        next(state.currentPageB, PageTypeVault());
+        reverseBehaviour(leftNavExpanderB);
+      },
+      [],
+      []
+    ),
+    MTextButton(
+      "User Profile",
+      \ -> {
+        next(state.currentPageB, PageTypeUserProfile());
+        reverseBehaviour(leftNavExpanderB);
+      },
+      [],
+      []
+    ),
+  ]);
+
+  page = MSelect(state.currentPageB, \currentPageType -> {
+    switch (currentPageType) {
+      PageTypeVault() : makePageVault(state);
+      PageTypeUserProfile() : makePageUserProfile(state);
+      default : MText("default page", []);
+    }
+  });
 
   leftNavHeader = MSNSmallHead([MText("Test", [])]);
-  leftNavExpanderB = make(false);
   leftNav = MLeftNav(
     MSideNav(
       MSNSmallHead([MText("This will be header", [])]),
-      MText("This will be list", []),
+      pageButtonsList,
       leftNavExpanderB,
       []
     ),
@@ -95,7 +124,12 @@ makeApp() -> MAppStructure {
     []
   );
 
-  topToolBar = MAppBar(MToolbar(leftNavExpanderB, MText("Notilda", []), [MText("Here will be buttons", [])], []));
+  topToolBar = MAppBar(
+    MSelect(
+      state.userB,
+      \user -> MToolbar(leftNavExpanderB, MText("Notilda", []), [MText(formatString("Welcome, %1", [user.name]), [])], [])
+    )
+  );
 
   MAppStructure([MContent(page), leftNav, topToolBar], []);
 }

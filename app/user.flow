@@ -4,6 +4,8 @@ export {
     name : string,
     password : string,
   );
+
+  makeDefaultUser() -> User;
 }
 
 User(
@@ -11,3 +13,7 @@ User(
   name : string,
   password : string,
 );
+
+makeDefaultUser() -> User {
+  User("-1", "tester", "test")
+}

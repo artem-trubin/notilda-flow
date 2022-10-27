@@ -4,7 +4,7 @@ import app/page;
 
 export {
   State(
-    userM : Maybe<User>,
+    userB : DynamicBehaviour<User>,
     notesB : DynamicBehaviour<[Note]>,
     currentNoteMB : DynamicBehaviour<Maybe<Note>>,
     currentPageB : DynamicBehaviour<PageType>,
@@ -14,12 +14,12 @@ export {
 }
 
 State(
-  userM : Maybe<User>,
+  userB : DynamicBehaviour<User>,
   notesB : DynamicBehaviour<[Note]>,
   currentNoteMB : DynamicBehaviour<Maybe<Note>>,
   currentPageB : DynamicBehaviour<PageType>,
 );
 
 makeInitialState() -> State {
-  State(None(), make([]), make(None()), make(PageTypeHome()))
+  State(make(makeDefaultUser()), make([]), make(None()), make(PageTypeHome()))
 }
