@@ -23,7 +23,7 @@ makePageUserProfile(state : State) -> Material {
 
   userNameInput = MTextInput(
     userNameB,
-    [],
+    [MLabel("Username"), MFloatingLabel()],
     []
   );
   userNameSaveButton = MTextButton("Save", saveUserSettings, [], []);

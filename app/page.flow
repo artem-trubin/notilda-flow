@@ -1,11 +1,12 @@
 import material/material2tropic;
 
 export {
-  PageType ::= PageTypeLogin, PageTypeVault, PageTypeUserProfile, PageTypeHome;
+  PageType ::= PageTypeLogin, PageTypeVault, PageTypeUserProfile, PageTypeHome, PageTypeRegistration;
   PageTypeLogin();
   PageTypeVault();
   PageTypeUserProfile();
   PageTypeHome();
+  PageTypeRegistration();
 
   makePageHome() -> Material;
 }

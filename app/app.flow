@@ -5,6 +5,8 @@ import app/note;
 import app/editor;
 import app/vault;
 import app/userProfilePage;
+import app/loginPage;
+import app/registrationPage;
 
 export {
   makeApp() -> MAppStructure;
@@ -83,31 +85,51 @@ makeApp() -> MAppStructure {
     )
   );
 
-  pageButtonsList = MLines([
-    MTextButton(
-      "Vault",
-      \ -> {
-        next(state.currentPageB, PageTypeVault());
-        reverseBehaviour(leftNavExpanderB);
-      },
-      [],
-      []
-    ),
-    MTextButton(
-      "User Profile",
-      \ -> {
-        next(state.currentPageB, PageTypeUserProfile());
-        reverseBehaviour(leftNavExpanderB);
-      },
-      [],
-      []
-    ),
-  ]);
+  buttonTexts = [
+    Pair("Vault", PageTypeVault()),
+    Pair("User Profile", PageTypeUserProfile()),
+    Pair("Login", PageTypeLogin()),
+    Pair("Registration", PageTypeRegistration()),
+  ];
+
+  // pageButtonsList = MLines([
+  //   MTextButton(
+  //     "Vault",
+  //     \ -> {
+  //       next(state.currentPageB, PageTypeVault());
+  //       reverseBehaviour(leftNavExpanderB);
+  //     },
+  //     [],
+  //     []
+  //   ),
+  //   MTextButton(
+  //     "User Profile",
+  //     \ -> {
+  //       next(state.currentPageB, PageTypeUserProfile());
+  //       reverseBehaviour(leftNavExpanderB);
+  //     },
+  //     [],
+  //     []
+  //   ),
+
+  // ]);
+
+  pageButtonsList = map(buttonTexts, \btn -> MTextButton(
+    btn.first,
+    \ -> {
+      next(state.currentPageB, btn.second);
+      reverseBehaviour(leftNavExpanderB);
+    },
+    [],
+    []
+  ));
 
   page = MSelect(state.currentPageB, \currentPageType -> {
     switch (currentPageType) {
       PageTypeVault() : makePageVault(state);
       PageTypeUserProfile() : makePageUserProfile(state);
+      PageTypeLogin() : makePageLogin(state);
+      PageTypeRegistration() : makePageRegistration(state);
       default : MText("default page", []);
     }
   });

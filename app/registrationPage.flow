@@ -1,0 +1,20 @@
+import material/material2tropic;
+
+import app/state;
+
+export {
+  makePageRegistration(state : State) -> Material;
+}
+
+makePageRegistration(state : State) -> Material {
+  usernameB = make("");
+  usernameInput = MTextInput(usernameB, [MLabel("username"), MFloatingLabel()], []);
+
+  passwordB = make("");
+  passwordInput = MTextInput(passwordB, [MLabel("Password"), MFloatingLabel()], []);
+
+  MLines([
+    usernameInput,
+    passwordInput,
+  ]);
+}
