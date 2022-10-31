@@ -18,17 +18,6 @@ makeApp() -> MAppStructure {
 
   state = makeInitialState();
 
-  mockTextForNotes = [
-    "Test note",
-    "Second test note",
-    "Third super ttest note",
-  ];
-
-  next(
-    state.notesB,
-    map(mockTextForNotes, \noteText -> Note(makeNoteId(), noteText))
-  );
-
   leftNavExpanderB = make(false);
 
   // Note functions
@@ -68,6 +57,34 @@ makeApp() -> MAppStructure {
       )
     )
   };
+
+  // Users funcitons
+
+  addUser = \user : User -> {
+    next(state.usersB, arrayPush(getValue(state.usersB, user)))
+  };
+
+  deleteUser = \userId : string -> {
+    next(
+      state.usersB,
+      filter(
+        getValue(state.usersB),
+        \user -> user.id != userId
+      )
+    )
+  };
+
+  loginUser = \user : User -> next(state.userB, user);
+
+  logoutUser = \ -> next(state.userB, makeDefaultUser();
+
+  deleteUser = \userId -> next(
+    state.usersB,
+    filter(
+      getValue(state.usersB),
+      \user -> user.id != userId
+    )
+  );
 
   // UI elements
 
