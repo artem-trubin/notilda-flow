@@ -17,46 +17,7 @@ makeApp() -> MAppStructure {
   // Initial work with data
 
   state = makeInitialState();
-
   leftNavExpanderB = make(false);
-
-  // Note functions
-
-  addNote = \note : Note -> {
-    next(state.notesB, arrayPush(getValue(state.notesB), note))
-  };
-
-  deleteNote = \noteId : string -> {
-    next(
-      state.notesB,
-      filter(
-        getValue(state.notesB),
-        \note -> note.id != noteId
-      )
-    )
-  };
-
-  startEditingNote = \noteId : string -> {
-    noteToEditM = find(getValue(state.notesB), \note -> note.id == noteId);
-
-    eitherFn(
-      noteToEditM,
-      \noteToEdit -> {
-        next(state.currentNoteMB, Some(noteToEdit))
-      },
-      \ -> println("Error: can't find not with such ID")
-    )
-  };
-
-  saveNote = \updatedNote : Note -> {
-    next(
-      state.notesB,
-      map(
-        getValue(state.notesB),
-        \note -> if (note.id == updatedNote.id) updatedNote else note
-      )
-    )
-  };
 
   // Users funcitons
 
@@ -77,20 +38,6 @@ makeApp() -> MAppStructure {
   logoutUser = \ -> next(state.userB, makeDefaultUser());
 
   // UI elements
-
-  notesList = MSelect(
-    state.notesB,
-    \notes -> MLines(
-      map(
-        notes,
-        \note -> makeNoteCard(
-          note,
-          deleteNote,
-          startEditingNote,
-        )
-      )
-    )
-  );
 
   buttonTexts = [
     Pair("Vault", PageTypeVault()),
