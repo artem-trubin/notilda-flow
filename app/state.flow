@@ -1,6 +1,7 @@
 import app/user;
 import app/note;
 import app/page;
+import app/utils;
 
 export {
   State(
@@ -38,7 +39,7 @@ makeInitialState() -> State {
   ];
   next(
     state.notesB,
-    map(mockTextForNotes, \noteText -> Note(makeNoteId(), noteText))
+    map(mockTextForNotes, \noteText -> Note(generateId(), noteText))
   );
 
   mockUsers = [

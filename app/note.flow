@@ -1,13 +1,12 @@
-import math/crypto;
 import material/material2tropic;
+
+import app/utils;
 
 export {
   Note(
     id : string,
     text : string,
   );
-
-  makeNoteId() -> string;
 
   AddNoteButton(
     onDone : (Note) -> void,
@@ -57,15 +56,11 @@ makeNoteCard(
   MCard(blocks, style, [])
 }
 
-makeNoteId() -> string {
-  generateUID("", "", 16)
-}
-
 createNote(
   text : string,
   onDone : (Note) -> void
 ) -> void {
-  newId = makeNoteId();
+  newId = generateId();
   note = Note(newId, text);
 
   onDone(note)

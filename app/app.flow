@@ -21,10 +21,6 @@ makeApp() -> MAppStructure {
 
   // Users funcitons
 
-  addUser = \user : User -> {
-    next(state.usersB, arrayPush(getValue(state.usersB), user))
-  };
-
   deleteUser = \userId : string -> next(
     state.usersB,
     filter(

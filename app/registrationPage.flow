@@ -1,20 +1,50 @@
 import material/material2tropic;
 
 import app/state;
+import app/utils;
 
 export {
   makePageRegistration(state : State) -> Material;
 }
 
 makePageRegistration(state : State) -> Material {
+
+  createUser = \
+    username : string,
+    password1 : string,
+    password2 : string,
+  -> {
+    if (password1 == password2) {
+      newUser = User(generateId(), username, password1);
+
+      next(state.usersB, arrayPush(getValue(state.usersB), newUser))
+    }
+  }
+
   usernameB = make("");
   usernameInput = MTextInput(usernameB, [MLabel("username"), MFloatingLabel()], []);
 
-  passwordB = make("");
-  passwordInput = MTextInput(passwordB, [MLabel("Password"), MFloatingLabel()], []);
+  password1B = make("");
+  passwordInput1 = MTextInput(password1B, [MLabel("Password"), MFloatingLabel()], []);
+
+  password2B = make("");
+  passwordInput2 = MTextInput(password2B, [MLabel("Repeat password"), MFloatingLabel()], []);
+
+  registerButton = MTextButton(
+    "Register",
+    \ -> createUser(
+      getValue(usernameB),
+      getValue(password1B),
+      getValue(password2B),
+    ),
+    [],
+    []
+  );
 
   MLines([
     usernameInput,
-    passwordInput,
+    passwordInput1,
+    passwordInput2,
+    registerButton,
   ]);
 }
