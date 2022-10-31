@@ -109,28 +109,6 @@ makeApp() -> MAppStructure {
     Pair("Registration", PageTypeRegistration()),
   ];
 
-  // pageButtonsList = MLines([
-  //   MTextButton(
-  //     "Vault",
-  //     \ -> {
-  //       next(state.currentPageB, PageTypeVault());
-  //       reverseBehaviour(leftNavExpanderB);
-  //     },
-  //     [],
-  //     []
-  //   ),
-  //   MTextButton(
-  //     "User Profile",
-  //     \ -> {
-  //       next(state.currentPageB, PageTypeUserProfile());
-  //       reverseBehaviour(leftNavExpanderB);
-  //     },
-  //     [],
-  //     []
-  //   ),
-
-  // ]);
-
   pageButtonsList = MLines(map(buttonTexts, \btn -> MTextButton(
     btn.first,
     \ -> {
