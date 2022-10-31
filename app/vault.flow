@@ -8,16 +8,6 @@ export {
 }
 
 makePageVault(state : State) -> Material {
-  mockTextForNotes = [
-    "Test note",
-    "Second test note",
-    "Third super ttest note",
-  ];
-
-  next(
-    state.notesB,
-    map(mockTextForNotes, \noteText -> Note(makeNoteId(), noteText))
-  );
 
   // Note functions
 

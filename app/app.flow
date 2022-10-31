@@ -61,30 +61,20 @@ makeApp() -> MAppStructure {
   // Users funcitons
 
   addUser = \user : User -> {
-    next(state.usersB, arrayPush(getValue(state.usersB, user)))
+    next(state.usersB, arrayPush(getValue(state.usersB), user))
   };
 
-  deleteUser = \userId : string -> {
-    next(
-      state.usersB,
-      filter(
-        getValue(state.usersB),
-        \user -> user.id != userId
-      )
-    )
-  };
-
-  loginUser = \user : User -> next(state.userB, user);
-
-  logoutUser = \ -> next(state.userB, makeDefaultUser();
-
-  deleteUser = \userId -> next(
+  deleteUser = \userId : string -> next(
     state.usersB,
     filter(
       getValue(state.usersB),
       \user -> user.id != userId
     )
   );
+
+  loginUser = \user : User -> next(state.userB, user);
+
+  logoutUser = \ -> next(state.userB, makeDefaultUser());
 
   // UI elements
 
