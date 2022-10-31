@@ -5,6 +5,7 @@ import app/page;
 export {
   State(
     userB : DynamicBehaviour<User>,
+    usersB : DynamicBehaviour<[User]>,
     notesB : DynamicBehaviour<[Note]>,
     currentNoteMB : DynamicBehaviour<Maybe<Note>>,
     currentPageB : DynamicBehaviour<PageType>,
@@ -15,11 +16,36 @@ export {
 
 State(
   userB : DynamicBehaviour<User>,
+  usersB : DynamicBehaviour<[User]>,
   notesB : DynamicBehaviour<[Note]>,
   currentNoteMB : DynamicBehaviour<Maybe<Note>>,
   currentPageB : DynamicBehaviour<PageType>,
 );
 
 makeInitialState() -> State {
-  State(make(makeDefaultUser()), make([]), make(None()), make(PageTypeHome()))
+  state = State(
+    make(makeDefaultUser()),
+    make([]),
+    make([]),
+    make(None()),
+    make(PageTypeHome())
+  );
+
+  mockTextForNotes = [
+    "Test note",
+    "Second test note",
+    "Third super ttest note",
+  ];
+  next(
+    state.notesB,
+    map(mockTextForNotes, \noteText -> Note(makeNoteId(), noteText))
+  );
+
+  mockUsers = [
+    User("1", "testUser", "test"),
+    User("2", "123", "123"),
+  ];
+  next(state.usersB, mockUsers);
+
+  state;
 }
