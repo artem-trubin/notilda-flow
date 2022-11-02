@@ -24,12 +24,14 @@ State(
 );
 
 makeInitialState() -> State {
+  initialPage = PageTypeLogin();
+
   state = State(
     make(makeDefaultUser()),
     make([]),
     make([]),
     make(None()),
-    make(PageTypeHome())
+    make(initialPage)
   );
 
   mockTextForNotes = [
@@ -37,6 +39,7 @@ makeInitialState() -> State {
     "Second test note",
     "Third super ttest note",
   ];
+
   next(
     state.notesB,
     map(mockTextForNotes, \noteText -> Note(generateId(), noteText))
