@@ -17,12 +17,21 @@ export {
     deleteCard : (noteId : string) -> void,
     startEditingCard : (noteId : string) -> void,
   ) -> MCard;
+
+  json2Note(json : Json) -> Note;
 }
 
 Note(
   id : string,
   text : string,
 );
+
+json2Note(json : Json) -> Note {
+  text = getJsonStringField(json, "content", "");
+  id = getJsonStringField(json, "id", "");
+
+  Note(id, text);
+}
 
 makeNoteCard(
   note : Note,

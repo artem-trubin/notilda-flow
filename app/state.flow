@@ -34,17 +34,6 @@ makeInitialState() -> State {
     make(initialPage)
   );
 
-  mockTextForNotes = [
-    "Test note",
-    "Second test note",
-    "Third super ttest note",
-  ];
-
-  next(
-    state.notesB,
-    map(mockTextForNotes, \noteText -> Note(generateId(), noteText))
-  );
-
   mockUsers = [
     User("1", "testUser", "test"),
     User("2", "123", "123"),

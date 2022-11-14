@@ -2,6 +2,7 @@ import material/material2tropic;
 
 import app/state;
 import app/editor;
+import app/requests;
 
 export {
   makePageVault(state : State) -> Material;
@@ -10,6 +11,10 @@ export {
 makePageVault(state : State) -> Material {
 
   // Note functions
+
+  updateNotes = \notes -> next(state.notesB, notes);
+
+  getNotes(updateNotes);
 
   addNote = \note : Note -> {
     next(state.notesB, arrayPush(getValue(state.notesB), note))

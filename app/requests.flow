@@ -1,0 +1,34 @@
+import net/http;
+
+import app/note;
+
+export {
+  getNotes(onNotesLoaded : ([Note]) -> void) -> void;
+}
+
+sourceUrl = "http://localhost:3001";
+
+getNotes(onNotesLoaded : ([Note]) -> void) -> void {
+  onLoad = \data -> {
+    dataJson = parseJson(data);
+    notesJson = getJsonArrayValue(dataJson, []);
+    onNotesLoaded(map(notesJson, json2Note));
+  }
+
+  onError = \err -> {
+    println("An unexpected error occured.");
+    println(err);
+  }
+
+  httpRequest(
+    sourceUrl + "/api/notes",
+    false,
+    [
+      KeyValue("Content-Type", "application/json")
+    ],
+    [],
+    onLoad,
+    onError,
+    nop1,
+  );
+}
