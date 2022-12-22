@@ -52,6 +52,10 @@ makeApp() -> MAppStructure {
     []
   )));
 
+  // saveNote(onNoteSaved : (string) -> void) -> void
+  println("Trying");
+  saveNote(\t -> println(t));
+
   page = MSelect(state.currentPageB, \currentPageType -> {
     switch (currentPageType) {
       PageTypeVault() : makePageVault(state);
