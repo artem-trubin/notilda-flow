@@ -3,11 +3,6 @@ import material/material2tropic;
 import app/utils;
 
 export {
-  Note(
-    id : string,
-    text : string,
-  );
-
   AddNoteButton(
     onDone : (Note) -> void,
   ) -> MTextButton;

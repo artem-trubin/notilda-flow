@@ -1,89 +1,21 @@
 import material/material;
 
-import app/state;
-import app/note;
-import app/editor;
-import app/vault;
-import app/userProfilePage;
-import app/loginPage;
-import app/registrationPage;
+import app/mock_data;
+import app/note/note;
+import app/note/note_list;
 
 export {
   makeApp() -> MAppStructure;
 }
 
 makeApp() -> MAppStructure {
+  notesB = make(makeMockNotes());
 
-  // Initial work with data
+  notesList = MSelect(notesB, makeNoteList);
 
-  state = makeInitialState();
-  leftNavExpanderB = make(false);
+  page = MColsA([
+    notesList
+  ]);
 
-  // Users funcitons
-
-  deleteUser = \userId : string -> next(
-    state.usersB,
-    filter(
-      getValue(state.usersB),
-      \user -> user.id != userId
-    )
-  );
-
-  loginUser = \user : User -> next(state.userB, user);
-
-  logoutUser = \ -> next(state.userB, makeDefaultUser());
-
-  // UI elements
-
-  buttonTexts = [
-    Pair("Vault", PageTypeVault()),
-    Pair("User Profile", PageTypeUserProfile()),
-    Pair("Login", PageTypeLogin()),
-    Pair("Registration", PageTypeRegistration()),
-  ];
-
-  pageButtonsList = MLines(map(buttonTexts, \btn -> MTextButton(
-    btn.first,
-    \ -> {
-      next(state.currentPageB, btn.second);
-      reverseBehaviour(leftNavExpanderB);
-    },
-    [],
-    []
-  )));
-
-  // saveNote(onNoteSaved : (string) -> void) -> void
-  println("Trying");
-  saveNote(\t -> println(t));
-
-  page = MSelect(state.currentPageB, \currentPageType -> {
-    switch (currentPageType) {
-      PageTypeVault() : makePageVault(state);
-      PageTypeUserProfile() : makePageUserProfile(state);
-      PageTypeLogin() : makePageLogin(state);
-      PageTypeRegistration() : makePageRegistration(state);
-      default : MText("default page", []);
-    }
-  });
-
-  leftNavHeader = MSNSmallHead([MText("Test", [])]);
-  leftNav = MLeftNav(
-    MSideNav(
-      MSNSmallHead([MText("This will be header", [])]),
-      pageButtonsList,
-      leftNavExpanderB,
-      []
-    ),
-    leftNavExpanderB,
-    []
-  );
-
-  topToolBar = MAppBar(
-    MSelect(
-      state.userB,
-      \user -> MToolbar(leftNavExpanderB, MText("Notilda", []), [MText(formatString("Welcome, %1", [user.name]), [])], [])
-    )
-  );
-
-  MAppStructure([MContent(page), leftNav, topToolBar], []);
+  MAppStructure([MContent(page)], []);
 }

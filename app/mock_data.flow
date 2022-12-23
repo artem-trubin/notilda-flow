@@ -1,0 +1,33 @@
+import app/note/note;
+
+export {
+  makeMockNotes() -> [Note];
+}
+
+makeMockNotes() -> [Note] {
+  [
+    Note(
+      "1",
+      "Wow, what a nice note",
+    ),
+    Note(
+      "3",
+      "This note is so so nice",
+    ),
+    Note(
+      "4",
+      "",
+    ),
+    Note(
+      "5",
+      "Wow, this note is even better!Wow, this note is even better!Wow, this note is even better!Wow, this note is even better!Wow, this note is even better!
+      Wow, this note is even better!
+      Wow, this note is even better!
+      Wow, this note is even better!
+
+      Wow, this note is even better!Wow, this note is even better!
+
+      Wow, this note is even better!",
+    ),
+  ]
+}

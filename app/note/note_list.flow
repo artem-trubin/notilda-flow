@@ -1,0 +1,14 @@
+import material/material;
+
+import app/note/note;
+import app/note/note_card;
+
+export {
+  makeNoteList(notes : [Note]) -> Material;
+}
+
+makeNoteList(notes : [Note]) -> Material {
+  noteCards = MLinesA(map(notes, makeNoteCard));
+
+  noteCards;
+}

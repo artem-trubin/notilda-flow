@@ -17,18 +17,16 @@ export {
 
 State(
   userB : DynamicBehaviour<User>,
-  usersB : DynamicBehaviour<[User]>,
   notesB : DynamicBehaviour<[Note]>,
   currentNoteMB : DynamicBehaviour<Maybe<Note>>,
   currentPageB : DynamicBehaviour<PageType>,
 );
 
 makeInitialState() -> State {
-  initialPage = PageTypeLogin();
+  initialPage = PageTypeVault();
 
   state = State(
     make(makeDefaultUser()),
-    make([]),
     make([]),
     make(None()),
     make(initialPage)
@@ -38,7 +36,6 @@ makeInitialState() -> State {
     User("1", "testUser", "test"),
     User("2", "123", "123"),
   ];
-  next(state.usersB, mockUsers);
 
   state;
 }

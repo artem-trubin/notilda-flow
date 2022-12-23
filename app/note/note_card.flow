@@ -1,0 +1,24 @@
+import material/material;
+
+import app/note/note;
+
+export {
+  makeNoteCard(
+    note : Note,
+  ) -> MCard;
+}
+
+makeNoteCard(
+  note : Note,
+) -> MCard {
+  noteText = MSupportingTextBlock(
+    note.text,
+    []
+  );
+
+  style = [
+    MCardWidth(256.0),
+  ];
+
+  MCard([noteText], style, []);
+}
