@@ -1,14 +1,28 @@
-import material/material;
+import material/material2tropic;
 
 import app/note/note;
 import app/note/note_card;
 
 export {
-  makeNoteList(notes : [Note]) -> Material;
+  makeNoteList(
+    notesB : DynamicBehaviour<[Note]>,
+    currentNoteIndB : DynamicBehaviour<int>,
+  ) -> Material;
 }
 
-makeNoteList(notes : [Note]) -> Material {
-  noteCards = MLinesA(map(notes, makeNoteCard));
-
-  noteCards;
+makeNoteList(
+  notesB : DynamicBehaviour<[Note]>,
+  currentNoteIndB : DynamicBehaviour<int>,
+) -> Material {
+  MSelect2(notesB, currentNoteIndB, \notes, currentNoteInd -> {
+    MLinesA(
+      mapi(
+        notes,
+        \ind, note -> makeNoteCard(
+          note,
+          \ -> nextDistinct(currentNoteIndB, ind)
+        )
+      )
+    )
+  });
 }

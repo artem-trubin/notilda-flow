@@ -5,11 +5,13 @@ import app/note/note;
 export {
   makeNoteCard(
     note : Note,
+    onClick : () -> void,
   ) -> MCard;
 }
 
 makeNoteCard(
   note : Note,
+  onClick : () -> void,
 ) -> MCard {
   noteText = MSupportingTextBlock(
     note.text,
@@ -20,5 +22,5 @@ makeNoteCard(
     MCardWidth(256.0),
   ];
 
-  MCard([noteText], style, []);
+  MCard([noteText], style, [MOnClick(onClick)]);
 }

@@ -1,37 +1,44 @@
-import material/material;
+import material/material2tropic;
 
 import app/note/note;
 
 export {
   makeEditor(
-    note : Maybe<Note>,
-    saveNote : (note : Note) -> void,
-    deleteNote : (note : Note) -> void,
-    progressSavedB : Transform<bool>,
+    currentNoteIndB : DynamicBehaviour<int>,
+    notesB : DynamicBehaviour<[Note]>,
   ) -> Material;
 }
 
 makeEditor(
-  noteM : Maybe<Note>,
-  saveNote : (note : Note) -> void,
-  deleteNote : (note : Note) -> void,
-  progressSavedB : Transform<bool>,
+  currentNoteIndB : DynamicBehaviour<int>,
+  notesB : DynamicBehaviour<[Note]>,
 ) -> Material {
-  eitherMap(
-    noteM,
-    \note -> {
+  MSelect(currentNoteIndB, \currentNoteInd -> {
+    if (currentNoteInd == -1) {
+      MCenterX(MCenterY(MText("Select note to edit", [])));
+    } else {
+      notes = getValue(notesB);
+      note = notes[currentNoteInd];
       noteTextB = make(note.text);
 
-      textEditor = MTextInput(
-        noteTextB,
-        [],
-        []
-      );
-
-      MLinesA([
-        textEditor,
-      ]);
-    },
-    MCenterX(MCenterY(MText("Select note to edit", [])))
-  );
+      MConstruct(
+        [
+          makeSubscribe(
+            noteTextB,
+            \t -> {
+              next(
+                notesB,
+                map(notes, \n -> if (n.id == note.id) Note(note with text = t) else n)
+              );
+            }
+          ),
+        ],
+        MTextInput(
+          noteTextB,
+          [],
+          []
+        )
+      )
+    }
+  })
 }
