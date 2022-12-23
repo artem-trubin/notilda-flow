@@ -1,0 +1,37 @@
+import material/material;
+
+import app/note/note;
+
+export {
+  makeEditor(
+    note : Maybe<Note>,
+    saveNote : (note : Note) -> void,
+    deleteNote : (note : Note) -> void,
+    progressSavedB : Transform<bool>,
+  ) -> Material;
+}
+
+makeEditor(
+  noteM : Maybe<Note>,
+  saveNote : (note : Note) -> void,
+  deleteNote : (note : Note) -> void,
+  progressSavedB : Transform<bool>,
+) -> Material {
+  eitherMap(
+    noteM,
+    \note -> {
+      noteTextB = make(note.text);
+
+      textEditor = MTextInput(
+        noteTextB,
+        [],
+        []
+      );
+
+      MLinesA([
+        textEditor,
+      ]);
+    },
+    MCenterX(MCenterY(MText("Select note to edit", [])))
+  );
+}

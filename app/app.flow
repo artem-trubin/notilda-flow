@@ -1,5 +1,6 @@
 import material/material;
 
+import app/editor/editor;
 import app/mock_data;
 import app/note/note;
 import app/note/note_list;
@@ -13,8 +14,41 @@ makeApp() -> MAppStructure {
 
   notesList = MSelect(notesB, makeNoteList);
 
+  currentNoteIdB = make("");
+
+  saveNote = \n : Note -> {
+    next(
+      notesB,
+      map(
+        getValue(notesB),
+        \note -> if (note.id == n.id) n else note
+      )
+    );
+  }
+  deleteNote = \n : Note -> {
+    next(
+      notesB,
+      filter(
+        getValue(notesB),
+        \note -> note.id != n.id
+      )
+    );
+  }
+
+  progressSavedB = make(true);
+
+  editor = MSelect(currentNoteIdB, \id -> {
+    makeEditor(
+      find(getValue(notesB), \note -> note.id == id),
+      saveNote,
+      deleteNote,
+      progressSavedB,
+    )
+  });
+
   page = MColsA([
-    notesList
+    notesList,
+    editor,
   ]);
 
   MAppStructure([MContent(page)], []);
