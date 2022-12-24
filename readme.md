@@ -11,7 +11,8 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 - [ ] Proper editor view
 
   - [ ] Maybe add title to notes
-  - [ ] Multiline editing
+  - [x] Multiline editing
+  - [ ] Better design in editor view
 
 - [ ] Notes editing
 
