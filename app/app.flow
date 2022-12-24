@@ -1,31 +1,18 @@
 import material/material;
 
-import app/editor/editor;
 import app/mock_data;
-import app/note/note;
-import app/note/note_list;
+import app/state/state;
+import app/view/view_router;
 
 export {
   makeApp() -> MAppStructure;
 }
 
 makeApp() -> MAppStructure {
-  notesB = make(makeMockNotes());
-  currentNoteIndB = make(-1);
+  state = makeEmptyState();
+  next(state.notesB, makeMockNotes()); // TODO: Change to real data loading
 
-  notesList = makeNoteList(notesB, currentNoteIndB);
+  content = makeViewRouter(state);
 
-  progressSavedB = make(true);
-
-  editor = makeEditor(
-    currentNoteIndB,
-    notesB,
-  );
-
-  page = MColsA([
-    notesList,
-    editor,
-  ]);
-
-  MAppStructure([MContent(page)], []);
+  MAppStructure([MContent(content)], []);
 }

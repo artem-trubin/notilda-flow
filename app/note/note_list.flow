@@ -5,24 +5,13 @@ import app/note/note_card;
 
 export {
   makeNoteList(
-    notesB : DynamicBehaviour<[Note]>,
-    currentNoteIndB : DynamicBehaviour<int>,
+    notes : [Note],
   ) -> Material;
 }
 
 makeNoteList(
-  notesB : DynamicBehaviour<[Note]>,
-  currentNoteIndB : DynamicBehaviour<int>,
+  notes : [Note],
 ) -> Material {
-  MSelect2(notesB, currentNoteIndB, \notes, currentNoteInd -> {
-    MLinesA(
-      mapi(
-        notes,
-        \ind, note -> makeNoteCard(
-          note,
-          \ -> nextDistinct(currentNoteIndB, ind)
-        )
-      )
-    )
-  });
+
+  MLinesA(map(notes, makeNoteCard));
 }

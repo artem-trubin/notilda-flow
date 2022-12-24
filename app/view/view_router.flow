@@ -1,0 +1,19 @@
+import app/view/view;
+import app/view/view_list;
+import app/state/state;
+
+export {
+  makeViewRouter(
+    state : NotildaState,
+  ) -> Material;
+}
+
+makeViewRouter(
+  state : NotildaState,
+) -> Material {
+  MSelect(state.currentViewB, \view -> {
+    switch(view) {
+      ViewList() : makeViewList(state);
+    }
+  });
+}

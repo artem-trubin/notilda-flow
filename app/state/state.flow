@@ -1,0 +1,17 @@
+import material/material2tropic;
+
+import app/note/note;
+import app/view/view;
+
+export {
+  NotildaState(
+    notesB : DynamicBehaviour<[Note]>,
+    currentViewB : DynamicBehaviour<View>,
+  );
+
+  makeEmptyState() -> NotildaState;
+}
+
+makeEmptyState() -> NotildaState {
+  NotildaState(make([]), make(ViewList()));
+}
