@@ -11,9 +11,16 @@ makeViewEditor(
   state : NotildaState,
 ) -> Material {
   MSelect(state.currentNoteB, \note -> {
+    noteTitleB = make(note.title);
     noteTextB = make(note.text);
 
-    MTextInput(
+    titleInput = MTextInput(
+      noteTitleB,
+      [],
+      [],
+    );
+
+    textInput = MTextInput(
       noteTextB,
       [
         Multiline(true),
@@ -22,5 +29,10 @@ makeViewEditor(
       ],
       []
     );
+
+    MLinesA([
+      titleInput,
+      textInput,
+    ])
   });
 }
