@@ -15,7 +15,11 @@ makeViewEditor(
 
     MTextInput(
       noteTextB,
-      [],
+      [
+        Multiline(true),
+        MMaxLines(10),
+        MOutlined(),
+      ],
       []
     );
   });
