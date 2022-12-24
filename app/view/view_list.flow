@@ -14,7 +14,12 @@ export {
 makeViewList(
   state : NotildaState,
 ) -> Material {
+  openNote = \note -> {
+    nextDistinct(state.currentNoteB, note);
+    nextDistinct(state.currentViewB, ViewEditor());
+  }
+
   MSelect(state.notesB, \notes : [Note] -> {
-    makeNoteList(notes);
+    makeNoteList(notes, openNote);
   });
 }

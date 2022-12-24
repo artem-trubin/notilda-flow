@@ -7,11 +7,16 @@ export {
   NotildaState(
     notesB : DynamicBehaviour<[Note]>,
     currentViewB : DynamicBehaviour<View>,
+    currentNoteB : DynamicBehaviour<Note>,
   );
 
   makeEmptyState() -> NotildaState;
 }
 
 makeEmptyState() -> NotildaState {
-  NotildaState(make([]), make(ViewList()));
+  NotildaState(
+    make([]),
+    make(ViewList()),
+    make(makeEmptyNote()),
+  );
 }

@@ -3,4 +3,10 @@ export {
     id : string,
     text : string,
   );
+
+  makeEmptyNote() -> Note;
+}
+
+makeEmptyNote() -> Note {
+  Note("", "");
 }

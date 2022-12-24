@@ -1,0 +1,38 @@
+import app/note/note;
+import app/state/state;
+
+export {
+  addOrUpdateNote(
+    state : NotildaState,
+    note : Note,
+  ) -> void;
+
+  removeNote(
+    state : NotildaState,
+    note : Note,
+  ) -> void;
+}
+
+addOrUpdateNote(
+  state : NotildaState,
+  note : Note,
+) -> void {
+  notes = getValue(state.notesB);
+  newNotes = eitherFn(
+    find(notes, \oldNote -> oldNote.id == note.id),
+    \oldNote -> map(notes, \n -> if (n.id == note.id) note else n)),
+    \ -> arrayPush(notes, note)
+  );
+
+  nextDistinct(state.notesB, newNotes);
+}
+
+removeNote(
+  state : NotildaState,
+  note : Note,
+) -> void {
+  notes = getValue(state.notesB);
+  newNotes = filter(notes, \n -> n.id != note.id);
+
+  nextDistinct(state.notesB, newNotes);
+}

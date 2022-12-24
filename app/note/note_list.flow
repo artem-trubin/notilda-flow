@@ -6,12 +6,14 @@ import app/note/note_card;
 export {
   makeNoteList(
     notes : [Note],
+    openNote : (note : Note) -> void,
   ) -> Material;
 }
 
 makeNoteList(
   notes : [Note],
+  openNote : (note : Note) -> void,
 ) -> Material {
 
-  MLinesA(map(notes, makeNoteCard));
+  MLinesA(map(notes, \n -> makeNoteCard(n, openNote)));
 }

@@ -1,0 +1,22 @@
+import app/note/note;
+import app/state/state;
+
+export {
+  makeViewEditor(
+    state : NotildaState,
+  ) -> Material;
+}
+
+makeViewEditor(
+  state : NotildaState,
+) -> Material {
+  MSelect(state.currentNoteB, \note -> {
+    noteTextB = make(note.text);
+
+    MTextInput(
+      noteTextB,
+      [],
+      []
+    );
+  });
+}

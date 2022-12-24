@@ -1,5 +1,6 @@
 import app/view/view;
 import app/view/view_list;
+import app/view/view_editor;
 import app/state/state;
 
 export {
@@ -14,6 +15,7 @@ makeViewRouter(
   MSelect(state.currentViewB, \view -> {
     switch(view) {
       ViewList() : makeViewList(state);
+      ViewEditor() : makeViewEditor(state);
     }
   });
 }
