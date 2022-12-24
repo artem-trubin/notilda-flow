@@ -1,6 +1,8 @@
 import app/globals;
 import app/note/note;
+import app/note/note_helpers;
 import app/state/state;
+import app/view/view;
 
 export {
   makeViewEditor(
@@ -14,6 +16,20 @@ makeViewEditor(
   MSelect(state.currentNoteB, \note -> {
     noteTitleB = make(note.title);
     noteTextB = make(note.text);
+    expander = MFixedY(16.0);
+
+    saveNote = \ -> {
+      addOrUpdateNote(
+        state,
+        Note(
+          note with
+          title = getValue(noteTitleB),
+          text = getValue(noteTextB)
+        )
+      );
+      resetCurrentNote(state);
+      nextDistinct(state.currentViewB, ViewList());
+    }
 
     viewTitle = MText(
       "Note" + if (debugOn) formatString(" [%1]", [note.id]) else "",
@@ -38,14 +54,22 @@ makeViewEditor(
       []
     );
 
+    saveButton = MTextButton("SAVE", saveNote, [], []);
+    buttonsBlock = MColsA([
+      MFillX(),
+      saveButton,
+    ]);
+
     MBorder4(
       16.0,
       MLinesA([
         viewTitle,
-        MFixedY(16.0),
+        expander,
         titleInput,
-        MFixedY(16.0),
+        expander,
         textInput,
+        expander,
+        buttonsBlock,
       ])
     );
   });

@@ -11,6 +11,10 @@ export {
     state : NotildaState,
     note : Note,
   ) -> void;
+
+  resetCurrentNote(
+    state : NotildaState,
+  ) -> void;
 }
 
 addOrUpdateNote(
@@ -20,7 +24,7 @@ addOrUpdateNote(
   notes = getValue(state.notesB);
   newNotes = eitherFn(
     find(notes, \oldNote -> oldNote.id == note.id),
-    \oldNote -> map(notes, \n -> if (n.id == note.id) note else n)),
+    \oldNote -> map(notes, \n -> if (n.id == note.id) note else n),
     \ -> arrayPush(notes, note)
   );
 
@@ -35,4 +39,10 @@ removeNote(
   newNotes = filter(notes, \n -> n.id != note.id);
 
   nextDistinct(state.notesB, newNotes);
+}
+
+resetCurrentNote(
+  state : NotildaState,
+) -> void {
+  nextDistinct(state.currentNoteB, makeEmptyNote());
 }

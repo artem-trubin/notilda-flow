@@ -16,9 +16,11 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 
 - [ ] Notes editing
 
-  - [ ] Function to edit notes
-  - [ ] Proper saving from editor
+  - [x] Function to edit notes
+  - [x] Proper saving from editor
   - [ ] Indicator that notes is saved/note saved
+  - [ ] Disable saving when there is nothing to save
+  - [ ] Add tooltip when disabled
 
 - [ ] Note card works
 
@@ -49,3 +51,6 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [ ] Add notebooks in list
   - [ ] Notebook edit window
   - [ ] Add notes to notebook
+
+- [ ] Bugs
+  - [ ] When you open note in editor it ignores newlines in input
