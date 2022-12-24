@@ -8,11 +8,11 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 
 ## TODO
 
-- [ ] Proper editor view
+- [x] Proper editor view
 
   - [x] Maybe add title to notes
   - [x] Multiline editing
-  - [ ] Better design in editor view
+  - [x] Better design in editor view
 
 - [ ] Notes editing
 

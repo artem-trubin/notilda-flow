@@ -1,3 +1,4 @@
+import app/globals;
 import app/note/note;
 import app/state/state;
 
@@ -14,9 +15,16 @@ makeViewEditor(
     noteTitleB = make(note.title);
     noteTextB = make(note.text);
 
+    viewTitle = MText(
+      "Note" + if (debugOn) formatString(" [%1]", [note.id]) else "",
+      []
+    );
+
     titleInput = MTextInput(
       noteTitleB,
-      [],
+      [
+        MOutlined(),
+      ],
       [],
     );
 
@@ -30,9 +38,15 @@ makeViewEditor(
       []
     );
 
-    MLinesA([
-      titleInput,
-      textInput,
-    ])
+    MBorder4(
+      16.0,
+      MLinesA([
+        viewTitle,
+        MFixedY(16.0),
+        titleInput,
+        MFixedY(16.0),
+        textInput,
+      ])
+    );
   });
 }
