@@ -20,6 +20,11 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [ ] Proper saving from editor
   - [ ] Indicator that notes is saved/note saved
 
+- [ ] Note card works
+
+  - [ ] Better handling of long notes
+  - [ ] Better handling of long titles
+
 - [ ] Close opened note
 
   - [ ] Button to close opened note
