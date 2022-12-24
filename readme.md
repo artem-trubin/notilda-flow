@@ -10,7 +10,7 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 
 - [ ] Proper editor view
 
-  - [ ] Maybe add title to notes
+  - [x] Maybe add title to notes
   - [x] Multiline editing
   - [ ] Better design in editor view
 
@@ -22,6 +22,7 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 
 - [ ] Note card works
 
+  - [ ] Better design for list view
   - [ ] Better handling of long notes
   - [ ] Better handling of long titles
 

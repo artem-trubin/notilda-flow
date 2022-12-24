@@ -13,9 +13,10 @@ makeNoteCard(
   note : Note,
   openNote : (note : Note) -> void,
 ) -> MCard {
-  noteText = MSupportingTextBlock(
+  noteContent = MPrimaryTextBlock(
+    note.title,
     note.text,
-    []
+    [],
   );
 
   onClick = \ -> openNote(note);
@@ -24,5 +25,5 @@ makeNoteCard(
     MCardWidth(256.0),
   ];
 
-  MCard([noteText], style, [MOnClick(onClick)]);
+  MCard([noteContent], style, [MOnClick(onClick)]);
 }
