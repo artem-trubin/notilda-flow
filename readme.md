@@ -14,13 +14,13 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [x] Multiline editing
   - [x] Better design in editor view
 
-- [ ] Notes editing
+- [x] Notes editing
 
   - [x] Function to edit notes
   - [x] Proper saving from editor
-  - [ ] Indicator that notes is saved/note saved
-  - [ ] Disable saving when there is nothing to save
-  - [ ] Add tooltip when disabled
+  - [x] Indicator that notes is saved/note saved
+  - [x] Disable saving when there is nothing to save
+  - [x] Add tooltip when disabled
 
 - [ ] Note card works
 
@@ -53,4 +53,9 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [ ] Add notes to notebook
 
 - [ ] Bugs
+
   - [ ] When you open note in editor it ignores newlines in input
+
+- [ ] Nice to have
+
+  - [ ] Navigation with "TAB"

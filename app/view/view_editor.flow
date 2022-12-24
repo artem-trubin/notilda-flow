@@ -18,6 +18,21 @@ makeViewEditor(
     noteTextB = make(note.text);
     expander = MFixedY(16.0);
 
+    progressSavedB = fselect2(
+      noteTitleB,
+      noteTextB,
+      FLift2(\noteTitle, noteText -> {
+        noteTitle == note.title && noteText == note.text
+      })
+    );
+
+    saveButtonToolTipB = fselect(
+      progressSavedB,
+      FLift(\saved -> {
+        if (saved) "No changes to save" else ""
+      }),
+    );
+
     saveNote = \ -> {
       addOrUpdateNote(
         state,
@@ -31,10 +46,30 @@ makeViewEditor(
       nextDistinct(state.currentViewB, ViewList());
     }
 
-    viewTitle = MText(
+    titleText = MText(
       "Note" + if (debugOn) formatString(" [%1]", [note.id]) else "",
       []
     );
+
+    savedIndicator = MSelect(
+      progressSavedB,
+      \saved -> {
+        MText(
+          if (saved) "All changes are saved"
+          else "There are unsaved changes",
+          [
+            if (saved) MGrey(500)
+            else MErrorColor(),
+          ]
+        )
+      }
+    )
+
+    viewTitle = MColsYCenterA([
+      titleText,
+      MFixedX(16.0),
+      savedIndicator,
+    ]);
 
     titleInput = MTextInput(
       noteTitleB,
@@ -54,7 +89,31 @@ makeViewEditor(
       []
     );
 
-    saveButton = MTextButton("SAVE", saveNote, [], []);
+    saveButton = MSelect2(
+      progressSavedB,
+      saveButtonToolTipB,
+      \saved, tooltipText, -> {
+        button = MTextButton(
+          "SAVE",
+          saveNote,
+          [],
+          [
+            MEnabled(const(!saved))
+          ]
+        );
+
+        if (!saved) {
+          button;
+        } else {
+          MTooltip(
+            button,
+            MText(tooltipText, []),
+            []
+          );
+        }
+      }
+    )
+
     buttonsBlock = MColsA([
       MFillX(),
       saveButton,
