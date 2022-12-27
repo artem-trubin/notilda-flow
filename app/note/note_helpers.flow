@@ -1,3 +1,5 @@
+import math/crypto;
+
 import app/note/note;
 import app/state/state;
 
@@ -17,15 +19,20 @@ export {
   ) -> void;
 }
 
+generateNoteId() -> string {
+  generateUID("", "", 16);
+}
+
 addOrUpdateNote(
   state : NotildaState,
   note : Note,
 ) -> void {
   notes = getValue(state.notesB);
+  newNote = if (note.id == "") Note(note with id = generateNoteId()) else note;
   newNotes = eitherFn(
-    find(notes, \oldNote -> oldNote.id == note.id),
-    \oldNote -> map(notes, \n -> if (n.id == note.id) note else n),
-    \ -> arrayPush(notes, note)
+    find(notes, \oldNote -> oldNote.id == newNote.id),
+    \oldNote -> map(notes, \n -> if (n.id == newNote.id) newNote else n),
+    \ -> arrayPush(notes, newNote)
   );
 
   nextDistinct(state.notesB, newNotes);

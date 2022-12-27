@@ -1,7 +1,7 @@
 import material/material;
 
 import app/note/note;
-import app/note/note_list;
+import app/note/note_card;
 import app/state/state;
 import app/view/view;
 
@@ -19,7 +19,31 @@ makeViewList(
     nextDistinct(state.currentViewB, ViewEditor());
   }
 
+  createNote = \ -> {
+    nextDistinct(state.currentNoteB, makeEmptyNote());
+    nextDistinct(state.currentViewB, ViewEditor());
+  }
+
+  addNoteButton = MTextButton(
+    "New Note",
+    createNote,
+    [],
+    [],
+  );
+
+  makeNoteList = \notes : [Note] -> MLinesA(
+    map(
+      notes,
+      \n -> makeNoteCard(n, openNote)
+    )
+  );
+
   MSelect(state.notesB, \notes : [Note] -> {
-    makeNoteList(notes, openNote);
+    MCenterX(
+      MLinesA([
+        addNoteButton,
+        makeNoteList(notes),
+      ])
+    )
   });
 }

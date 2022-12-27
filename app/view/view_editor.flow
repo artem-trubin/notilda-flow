@@ -17,12 +17,13 @@ makeViewEditor(
     noteTitleB = make(note.title);
     noteTextB = make(note.text);
     expander = MFixedY(16.0);
+    isNoteNew = note.id == "";
 
     progressSavedB = fselect2(
       noteTitleB,
       noteTextB,
       FLift2(\noteTitle, noteText -> {
-        noteTitle == note.title && noteText == note.text
+        noteTitle == note.title && noteText == note.text && !isNoteNew
       })
     );
 

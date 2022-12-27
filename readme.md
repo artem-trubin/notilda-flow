@@ -33,10 +33,10 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [ ] Button to close opened note
   - [ ] Dialog to prevent loosing progress
 
-- [ ] Notes creation
+- [x] Notes creation
 
-  - [ ] Function to create notes
-  - [ ] Button to create notes
+  - [x] Function to create notes
+  - [x] Button to create notes
 
 - [ ] Notes deleting
 
