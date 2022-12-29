@@ -66,6 +66,12 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [ ] Notebook edit window
   - [ ] Add notes to notebook
 
+- [ ] List view improvements
+
+  - [ ] Notebook support
+  - [ ] Try dragging support
+  - [ ] Add toggler to show/hide delete buttons
+
 - [ ] Bugs
 
   - [ ] When you open note in editor it ignores newlines in input
