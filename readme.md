@@ -22,27 +22,41 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [x] Disable saving when there is nothing to save
   - [x] Add tooltip when disabled
 
-- [ ] Note card works
+- [x] Note card works
 
-  - [ ] Better design for list view
-  - [ ] Better handling of long notes
-  - [ ] Better handling of long titles
+  - [x] Better design for list view
+  - [x] Better handling of long notes
+  - [x] Better handling of long titles
 
-- [ ] Close opened note
+- [ ] Editor improvements
 
   - [ ] Button to close opened note
   - [ ] Dialog to prevent loosing progress
+  - [ ] Button to delete current edited note
 
 - [x] Notes creation
 
   - [x] Function to create notes
   - [x] Button to create notes
 
-- [ ] Notes deleting
+- [x] Notes deleting
 
-  - [ ] Delete functionality
+  - [x] Delete functionality
 
-- [ ] User settings view
+- [ ] User stuff
+
+  - [ ] Make user types
+  - [ ] Make some mock users
+  - [ ] Make login page
+    - [ ] Login functionality
+    - [ ] Login view
+  - [ ] Make registration page
+    - [ ] Registration functionality
+    - [ ] Registration view
+  - [ ] Change note's types to support authors
+  - [ ] Change mockup notes to add authors
+  - [ ] Change list view to only show notes for current author
+  - [ ] Change note creation to add current author to note
 
 - [ ] Notebooks
 
@@ -59,3 +73,7 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 - [ ] Nice to have
 
   - [ ] Navigation with "TAB"
+  - [ ] Drag notes
+  - [ ] Creation date to notes
+  - [ ] Note tags
+  - [ ] Sorting list by creation date, tags etc.
