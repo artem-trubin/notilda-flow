@@ -1,8 +1,0 @@
-export {
-  Note(
-    id : string,
-    text : string,
-  );
-
-
-}

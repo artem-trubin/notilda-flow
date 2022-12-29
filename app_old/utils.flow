@@ -1,9 +1,0 @@
-import math/crypto;
-
-export {
-  generateId() -> string;
-}
-
-generateId() -> string {
-  generateUID("", "", 16)
-}
