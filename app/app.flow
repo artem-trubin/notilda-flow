@@ -5,11 +5,11 @@ import app/state/state;
 import app/view/view_router;
 
 export {
-  makeApp() -> MAppStructure;
+  makeApp(m : MaterialManager) -> MAppStructure;
 }
 
-makeApp() -> MAppStructure {
-  state = makeEmptyState();
+makeApp(m : MaterialManager) -> MAppStructure {
+  state = NotildaState(makeEmptyState() with manager = m);
   next(state.notesB, makeMockNotes()); // TODO: Change to real data loading
 
   content = makeViewRouter(state);

@@ -5,6 +5,7 @@ import app/view/view;
 
 export {
   NotildaState(
+    manager : MaterialManager,
     notesB : DynamicBehaviour<[Note]>,
     currentViewB : DynamicBehaviour<View>,
     currentNoteB : DynamicBehaviour<Note>,
@@ -15,6 +16,7 @@ export {
 
 makeEmptyState() -> NotildaState {
   NotildaState(
+    makeMaterialManager([]),
     make([]),
     make(ViewList()),
     make(makeEmptyNote()),

@@ -1,0 +1,50 @@
+import material/material_dialog;
+
+export {
+  showConfirmationDialog(
+    manager : MaterialManager,
+    text : string,
+    onConfirm : () -> void,
+    onCancel : () -> void,
+  ) -> void;
+}
+
+showConfirmationDialog(
+  manager : MaterialManager,
+  text : string,
+  onConfirm : () -> void,
+  onCancel : () -> void,
+) -> void {
+  closeWhen = make(false);
+
+  dialogText = MText(text, []);
+
+  confirmButton = MTextButton(
+    "CONFIRM",
+    \ -> {
+      next(closeWhen, true);
+      onConfirm();
+    },
+    [],
+    []
+  );
+  cancelButton = MTextButton(
+    "CANCEL",
+    \ -> {
+      next(closeWhen, true);
+      onCancel();
+    },
+    [],
+    []
+  );
+
+  ShowMDialog(
+    manager,
+    closeWhen,
+    [
+      MDialogUseFrame(),
+      MDialogActions([cancelButton, confirmButton]),
+    ],
+    dialogText,
+  );
+}

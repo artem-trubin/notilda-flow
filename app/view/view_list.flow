@@ -1,7 +1,9 @@
 import material/material;
 
+import app/dialogs;
 import app/note/note;
 import app/note/note_card;
+import app/note/note_helpers;
 import app/state/state;
 import app/view/view;
 
@@ -24,6 +26,15 @@ makeViewList(
     nextDistinct(state.currentViewB, ViewEditor());
   }
 
+  onDeleteClick = \note : Note -> {
+    showConfirmationDialog(
+      state.manager,
+      "Are you sure you want to delete this note?",
+      \ -> removeNote(state, note),
+      nop,
+    )
+  }
+
   addNoteButton = MTextButton(
     "New Note",
     createNote,
@@ -34,7 +45,7 @@ makeViewList(
   makeNoteList = \notes : [Note] -> MLinesA(
     map(
       notes,
-      \n -> makeNoteCard(n, openNote)
+      \n -> makeNoteCard(n, openNote, onDeleteClick, false)
     )
   );
 

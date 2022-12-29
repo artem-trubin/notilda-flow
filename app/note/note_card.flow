@@ -1,29 +1,67 @@
-import material/material;
+import material/material2tropic;
 
+import app/dialogs;
 import app/note/note;
 
 export {
   makeNoteCard(
     note : Note,
-    openNote : (note : Note) -> void,
-  ) -> MCard;
+    onNoteClick : (note : Note) -> void,
+    onDeleteClick : (note : Note) -> void,
+    showActions : bool,
+  ) -> Material;
 }
 
 makeNoteCard(
   note : Note,
-  openNote : (note : Note) -> void,
-) -> MCard {
+  onNoteClick : (note : Note) -> void,
+  onDeleteClick : (note : Note) -> void,
+  showActions : bool,
+) -> Material {
+  noteTitleLength = 20;
+  noteTitle = if (strlen(note.title) > noteTitleLength) {
+    substring(note.title, 0, noteTitleLength) + "...";
+  } else {
+    note.title;
+  }
+
+  noteTextLength = 100;
+  noteText = if (strlen(note.text) > noteTextLength) {
+    substring(note.text, 0, noteTextLength) + "...";
+  } else {
+    note.text;
+  }
+
   noteContent = MPrimaryTextBlock(
-    note.title,
-    note.text,
+    noteTitle,
+    noteText,
     [],
   );
 
-  onClick = \ -> openNote(note);
+  actionBlock = MActionBlock(
+    [],
+    [
+      MTextButton(
+        "DELETE",
+        \ -> onDeleteClick(note),
+        [],
+        []
+      )
+    ],
+    []
+  );
+
+  cardOnClick = \ -> onNoteClick(note);
 
   style = [
     MCardWidth(256.0),
   ];
 
-  MCard([noteContent], style, [MOnClick(onClick)]);
+  MCard(
+    [noteContent, actionBlock],
+    style,
+    [
+      MOnClick(cardOnClick),
+    ]
+  )
 }
