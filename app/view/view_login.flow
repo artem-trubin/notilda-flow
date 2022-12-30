@@ -14,27 +14,27 @@ makeViewLogin(
   state : NotildaState,
 ) -> Material {
   inputWidth = 256.0;
-  loginInputTextB = make("");
+  usernameInputTextB = make("");
   passwordInputTextB = make("");
   warningTextB = make("");
 
   tryLogin = \ -> {
-    login = getValue(loginInputTextB);
+    username = getValue(usernameInputTextB);
     password = getValue(passwordInputTextB);
 
     eitherFn(
-      getUserByLoginPassword(state, login, password),
+      getUserByLoginPassword(state, username, password),
       \user -> { loginUser(state, user); next(state.currentViewB, ViewList()); },
-      \ -> next(warningTextB, "User not found. Wrong login or password."),
+      \ -> next(warningTextB, "User not found. Wrong username or password."),
     );
   }
 
   warning = MSelect(warningTextB, \text -> MText(text, [MRed(500)]));
   loginInput = MTextInput(
-    loginInputTextB,
+    usernameInputTextB,
     [
       MWidth(inputWidth),
-      MLabel("Login"),
+      MLabel("Username"),
       MFloatingLabel(),
     ],
     []
