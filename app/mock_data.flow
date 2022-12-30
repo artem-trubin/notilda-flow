@@ -2,6 +2,7 @@ import app/note/note;
 
 export {
   makeMockNotes() -> [Note];
+  makeMockUsers() -> [User];
 }
 
 makeMockNotes() -> [Note] {
@@ -32,6 +33,26 @@ makeMockNotes() -> [Note] {
 
       Wow, this note is even better!",
       "",
+    ),
+  ]
+}
+
+makeMockUsers() -> [User] {
+  [
+    User(
+      "1",
+      "test",
+      "test",
+    ),
+    User(
+      "2",
+      "artem",
+      "test",
+    ),
+    User(
+      "3",
+      "admin",
+      "admin",
     ),
   ]
 }

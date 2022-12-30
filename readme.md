@@ -45,8 +45,8 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 
 - [ ] User stuff
 
-  - [ ] Make user types
-  - [ ] Make some mock users
+  - [x] Make user types
+  - [x] Make some mock users
   - [ ] Make login page
     - [ ] Login functionality
     - [ ] Login view
