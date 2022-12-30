@@ -1,14 +1,19 @@
 import material/material2tropic;
 
+
+import app/globals;
 import app/note/note;
+import app/user/user;
 import app/view/view;
 
 export {
   NotildaState(
     manager : MaterialManager,
-    notesB : DynamicBehaviour<[Note]>,
     currentViewB : DynamicBehaviour<View>,
+    notesB : DynamicBehaviour<[Note]>,
     currentNoteB : DynamicBehaviour<Note>,
+    usersB : DynamicBehaviour<[User]>,
+    currentUserB : DynamicBehaviour<User>,
   );
 
   makeEmptyState() -> NotildaState;
@@ -17,8 +22,10 @@ export {
 makeEmptyState() -> NotildaState {
   NotildaState(
     makeMaterialManager([]),
+    make(defaultView),
     make([]),
-    make(ViewList()),
     make(makeEmptyNote()),
+    make([]),
+    make(makeEmptyUser()),
   );
 }
