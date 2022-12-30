@@ -28,11 +28,11 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [x] Better handling of long notes
   - [x] Better handling of long titles
 
-- [ ] Editor improvements
+- [x] Editor improvements
 
   - [x] Button to close opened note
   - [x] Dialog to prevent loosing progress
-  - [ ] Button to delete current edited note
+  - [x] Button to delete current edited note
 
 - [x] Notes creation
 

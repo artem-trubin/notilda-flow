@@ -67,6 +67,18 @@ makeViewEditor(
       }
     }
 
+    deleteNote = \ -> {
+      showConfirmationDialog(
+        state.manager,
+        "Are you sure you want to delete this note?",
+        \ -> {
+          removeNote(state, note);
+          returnToListView();
+        },
+        nop,
+      );
+    }
+
     titleText = MText(
       "Note" + if (debugOn) formatString(" [%1]", [note.id]) else "",
       []
@@ -142,9 +154,17 @@ makeViewEditor(
       []
     );
 
+    deleteButton = MTextButton(
+      "DELETE",
+      deleteNote,
+      [],
+      []
+    );
+
     buttonsBlock = MColsA([
       MFillX(),
       closeButton,
+      deleteButton,
       saveButton,
     ]);
 
