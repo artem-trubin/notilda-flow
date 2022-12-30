@@ -30,8 +30,8 @@ Written with [flow9](https://github.com/area9innovation/flow9).
 
 - [ ] Editor improvements
 
-  - [ ] Button to close opened note
-  - [ ] Dialog to prevent loosing progress
+  - [x] Button to close opened note
+  - [x] Dialog to prevent loosing progress
   - [ ] Button to delete current edited note
 
 - [x] Notes creation
