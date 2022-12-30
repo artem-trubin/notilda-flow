@@ -1,3 +1,4 @@
+import app/dialogs;
 import app/globals;
 import app/note/note;
 import app/note/note_helpers;
@@ -47,6 +48,25 @@ makeViewEditor(
       nextDistinct(state.currentViewB, ViewList());
     }
 
+    returnToListView = \ -> {
+      next(state.currentNoteB, makeEmptyNote());
+      next(state.currentViewB, ViewList());
+    }
+
+    closeNote = \ -> {
+      if (fgetValue(progressSavedB)) {
+        returnToListView();
+      } else {
+        showUnsavedChangesDialog(
+          state.manager,
+          "This note has unsaved changes, please specify action.",
+          \ -> { saveNote(); returnToListView(); },
+          nop,
+          \ -> returnToListView(),
+        );
+      }
+    }
+
     titleText = MText(
       "Note" + if (debugOn) formatString(" [%1]", [note.id]) else "",
       []
@@ -64,7 +84,7 @@ makeViewEditor(
           ]
         )
       }
-    )
+    );
 
     viewTitle = MColsYCenterA([
       titleText,
@@ -113,10 +133,18 @@ makeViewEditor(
           );
         }
       }
-    )
+    );
+
+    closeButton = MTextButton(
+      "CLOSE",
+      closeNote,
+      [],
+      []
+    );
 
     buttonsBlock = MColsA([
       MFillX(),
+      closeButton,
       saveButton,
     ]);
 

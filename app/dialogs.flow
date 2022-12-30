@@ -7,6 +7,14 @@ export {
     onConfirm : () -> void,
     onCancel : () -> void,
   ) -> void;
+
+  showUnsavedChangesDialog(
+    manager : MaterialManager,
+    text : string,
+    onSave : () -> void,
+    onCancel : () -> void,
+    onWithoutSave : () -> void,
+  ) -> void;
 }
 
 showConfirmationDialog(
@@ -47,4 +55,52 @@ showConfirmationDialog(
     ],
     dialogText,
   );
+}
+
+showUnsavedChangesDialog(
+  manager : MaterialManager,
+  text : string,
+  onSave : () -> void,
+  onCancel : () -> void,
+  onWithoutSave : () -> void,
+) -> void {
+  closeWhen = make(false);
+
+  closeAndAction = \fn -> {
+    fn();
+    next(closeWhen, true);
+  }
+
+  dialogText = MText(text, []);
+
+  saveButton = MTextButton(
+    "SAVE AND EXIT",
+    \ -> closeAndAction(onSave),
+    [],
+    []
+  );
+
+  cancelButton = MTextButton(
+    "CANCEL",
+    \ -> closeAndAction(onCancel),
+    [],
+    []
+  );
+
+  withoutSaveButton = MTextButton(
+    "CLOSE WITHOUT SAVING",
+    \ -> closeAndAction(onWithoutSave),
+    [],
+    []
+  );
+
+  ShowMDialog(
+    manager,
+    closeWhen,
+    [
+      MDialogUseFrame(),
+      MDialogActions([cancelButton, withoutSaveButton, saveButton]),
+    ],
+    dialogText,
+  )
 }
