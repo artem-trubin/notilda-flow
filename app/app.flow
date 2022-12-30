@@ -11,6 +11,7 @@ export {
 makeApp(m : MaterialManager) -> MAppStructure {
   state = NotildaState(makeEmptyState() with manager = m);
   next(state.notesB, makeMockNotes()); // TODO: Change to real data loading
+  next(state.usersB, makeMockUsers());
 
   content = makeViewRouter(state);
 

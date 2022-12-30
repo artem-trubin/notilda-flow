@@ -1,0 +1,32 @@
+import app/state/state;
+
+export {
+  getUserByLoginPassword(
+    state : NotildaState,
+    login : string,
+    password : string,
+  ) -> Maybe<User>;
+
+  loginUser(
+    state : NotildaState,
+    user : User,
+  ) -> void;
+}
+
+getUserByLoginPassword(
+  state : NotildaState,
+  login : string,
+  password : string,
+) -> Maybe<User> {
+  find(
+    getValue(state.usersB),
+    \user -> user.name == login && user.password == password
+  );
+}
+
+loginUser(
+  state : NotildaState,
+  user : User,
+) -> void {
+  next(state.currentUserB, user);
+}

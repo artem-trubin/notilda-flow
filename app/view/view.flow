@@ -1,5 +1,6 @@
 export {
-  View ::= ViewList, ViewEditor;
+  View ::= ViewList, ViewEditor, ViewLogin;
     ViewList();
     ViewEditor();
+    ViewLogin();
 }

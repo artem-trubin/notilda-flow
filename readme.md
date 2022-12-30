@@ -48,9 +48,9 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [x] Make user types
   - [x] Make some mock users
   - [x] User in state
-  - [ ] Make login page
-    - [ ] Login functionality
-    - [ ] Login view
+  - [x] Make login page
+    - [x] Login functionality
+    - [x] Login view
   - [ ] Make registration page
     - [ ] Registration functionality
     - [ ] Registration view
@@ -84,3 +84,6 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [ ] Creation date to notes
   - [ ] Note tags
   - [ ] Sorting list by creation date, tags etc.
+  - [ ] User settings view
+    - [ ] Change user name
+    - [ ] Change theme

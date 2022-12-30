@@ -1,0 +1,63 @@
+import material/material2tropic;
+
+import app/user/user;
+import app/user/user_helpers;
+import app/view/view;
+
+export {
+  makeViewLogin(
+    state : NotildaState,
+  ) -> Material;
+}
+
+makeViewLogin(
+  state : NotildaState,
+) -> Material {
+  inputWidth = 256.0;
+  loginInputTextB = make("");
+  passwordInputTextB = make("");
+  warningTextB = make("");
+
+  tryLogin = \ -> {
+    login = getValue(loginInputTextB);
+    password = getValue(passwordInputTextB);
+
+    eitherFn(
+      getUserByLoginPassword(state, login, password),
+      \user -> { loginUser(state, user); next(state.currentViewB, ViewList()); },
+      \ -> next(warningTextB, "User not found. Wrong login or password."),
+    );
+  }
+
+  warning = MSelect(warningTextB, \text -> MText(text, [MRed(500)]));
+  loginInput = MTextInput(
+    loginInputTextB,
+    [
+      MWidth(inputWidth),
+      MLabel("Login"),
+      MFloatingLabel(),
+    ],
+    []
+  );
+  passwordInput = MTextInput(
+    passwordInputTextB,
+    [
+      MWidth(inputWidth),
+      MLabel("Password"),
+      MFloatingLabel(),
+    ],
+    []
+  );
+  loginButton = MTextButton("LOGIN", tryLogin, [], [MShortcut("enter")]);
+
+  MCenterY(
+    MCenterX(
+      MLinesXCenter([
+        loginInput,
+        passwordInput,
+        loginButton,
+        warning,
+      ])
+    )
+  );
+}

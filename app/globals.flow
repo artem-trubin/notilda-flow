@@ -2,5 +2,5 @@ import app/view/view;
 
 export {
   debugOn = true;
-  defaultView = ViewList();
+  defaultView = ViewLogin();
 }
