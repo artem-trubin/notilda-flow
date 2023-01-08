@@ -87,3 +87,5 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [ ] User settings view
     - [ ] Change user name
     - [ ] Change theme
+  - [ ] Better usage of inputs in login/registration views
+  - [ ] Better "to login" and "to registration" buttons

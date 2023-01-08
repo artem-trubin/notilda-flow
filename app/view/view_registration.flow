@@ -1,0 +1,88 @@
+import material/material2tropic;
+
+import app/state/state;
+import app/user/user_helpers;
+
+export {
+  makeViewRegistration(
+    state : NotildaState,
+  ) -> Material;
+}
+
+makeViewRegistration(
+  state : NotildaState,
+) -> Material {
+  inputWidth = 256.0;
+  usernameInputTextB = make("");
+  password1InputTextB = make("");
+  password2InputTextB = make("");
+  warningTextB = make("");
+
+  tryRegister = \ -> {
+    username = getValue(usernameInputTextB);
+    password1 = getValue(password1InputTextB);
+    password2 = getValue(password2InputTextB);
+
+    if (password1 != password2) {
+      next(warningTextB, "Passwords don't match.");
+    } else if (isExistingUsername(state, username)) {
+      next(warningTextB, "There is already user with this username");
+    } else {
+      addOrUpdateUser(
+        state,
+        User(
+          getValue(state.currentUserB) with
+          name = username,
+          password = password1,
+        )
+      );
+    }
+  }
+
+  toLoginView = \ -> {
+    next(state.currentViewB, ViewLogin());
+  }
+
+  warning = MSelect(warningTextB, \text -> MText(text, [MRed(500)]));
+  usernameInput = MTextInput(
+    usernameInputTextB,
+    [
+      MWidth(inputWidth),
+      MLabel("Username"),
+      MFloatingLabel(),
+    ],
+    []
+  );
+  password1Input = MTextInput(
+    password1InputTextB,
+    [
+      MWidth(inputWidth),
+      MLabel("Password"),
+      MFloatingLabel(),
+    ],
+    []
+  );
+  password2Input = MTextInput(
+    password2InputTextB,
+    [
+      MWidth(inputWidth),
+      MLabel("Repeat password"),
+      MFloatingLabel(),
+    ],
+    []
+  );
+  registerButton = MTextButton("REGISTER", tryRegister, [], [MShortcut("enter")]);
+  toLoginButton = MTextButton("TO LOGIN PAGE", toLoginView, [], []);
+
+  MCenterY(
+    MCenterX(
+      MLinesXCenter([
+        usernameInput,
+        password1Input,
+        password2Input,
+        MCols([toLoginButton, registerButton]),
+        warning,
+      ])
+    )
+  );
+}

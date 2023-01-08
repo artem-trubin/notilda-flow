@@ -1,7 +1,8 @@
 import app/view/view;
+import app/view/view_editor;
 import app/view/view_list;
 import app/view/view_login;
-import app/view/view_editor;
+import app/view/view_registration;
 import app/state/state;
 
 export {
@@ -18,6 +19,7 @@ makeViewRouter(
       ViewList() : makeViewList(state);
       ViewEditor() : makeViewEditor(state);
       ViewLogin() : makeViewLogin(state);
+      ViewRegistration() : makeViewRegistration(state);
     }
   });
 }

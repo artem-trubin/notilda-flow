@@ -29,8 +29,12 @@ makeViewLogin(
     );
   }
 
+  toRegistrationView = \ -> {
+    next(state.currentViewB, ViewRegistration());
+  }
+
   warning = MSelect(warningTextB, \text -> MText(text, [MRed(500)]));
-  loginInput = MTextInput(
+  usernameInput = MTextInput(
     usernameInputTextB,
     [
       MWidth(inputWidth),
@@ -49,13 +53,18 @@ makeViewLogin(
     []
   );
   loginButton = MTextButton("LOGIN", tryLogin, [], [MShortcut("enter")]);
+  toRegistrationButton = MTextButton(
+    "TO REGISTRATION PAGE",
+    toRegistrationView,
+    [], []
+  );
 
   MCenterY(
     MCenterX(
       MLinesXCenter([
-        loginInput,
+        usernameInput,
         passwordInput,
-        loginButton,
+        MCols([toRegistrationButton, loginButton]),
         warning,
       ])
     )

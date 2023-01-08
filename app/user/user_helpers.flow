@@ -1,9 +1,11 @@
+import math/crypto;
+
 import app/state/state;
 
 export {
   getUserByLoginPassword(
     state : NotildaState,
-    login : string,
+    username : string,
     password : string,
   ) -> Maybe<User>;
 
@@ -11,16 +13,26 @@ export {
     state : NotildaState,
     user : User,
   ) -> void;
+
+  isExistingUsername(
+    state : NotildaState,
+    username : string,
+  ) -> bool;
+
+  addOrUpdateUser(
+    state : NotildaState,
+    user : User,
+  ) -> void;
 }
 
 getUserByLoginPassword(
   state : NotildaState,
-  login : string,
+  username : string,
   password : string,
 ) -> Maybe<User> {
   find(
     getValue(state.usersB),
-    \user -> user.name == login && user.password == password
+    \user -> user.name == username && user.password == password
   );
 }
 
@@ -29,4 +41,31 @@ loginUser(
   user : User,
 ) -> void {
   next(state.currentUserB, user);
+}
+
+isExistingUsername(
+  state : NotildaState,
+  username : string,
+) -> bool {
+  users = getValue(state.usersB);
+  isSome(find(users, \u -> u.name == username));
+}
+
+generateUserId() -> string {
+  generateUID("", "", 16);
+}
+
+addOrUpdateUser(
+  state : NotildaState,
+  user : User,
+) -> void {
+  users = getValue(state.usersB);
+  newUser = if (user.id == "") User(user with id = generateUserId()) else user;
+  newUsers = eitherFn(
+    find(users, \oldUser -> oldUser.id == newUser.id),
+    \oldUser -> map(users, \u -> if (u.id == newUser.id) newUser else u),
+    \ -> arrayPush(users, newUser)
+  );
+
+  nextDistinct(state.usersB, newUsers);
 }
