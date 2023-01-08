@@ -14,6 +14,7 @@ export {
     currentNoteB : DynamicBehaviour<Note>,
     usersB : DynamicBehaviour<[User]>,
     currentUserB : DynamicBehaviour<User>,
+    sidebarExpandedB : DynamicBehaviour<bool>,
   );
 
   makeEmptyState() -> NotildaState;
@@ -27,5 +28,6 @@ makeEmptyState() -> NotildaState {
     make(makeEmptyNote()),
     make([]),
     make(makeEmptyUser()),
+    make(false),
   );
 }

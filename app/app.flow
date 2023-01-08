@@ -1,5 +1,7 @@
 import material/material;
 
+import app/common/header;
+import app/common/sidebar;
 import app/mock_data;
 import app/state/state;
 import app/view/view_router;
@@ -13,7 +15,9 @@ makeApp(m : MaterialManager) -> MAppStructure {
   next(state.notesB, makeMockNotes()); // TODO: Change to real data loading
   next(state.usersB, makeMockUsers());
 
-  content = makeViewRouter(state);
+  content = MContent(makeViewRouter(state));
+  header = MAppBar(makeHeader(state));
+  sidebar = MLeftNav(makeSidebar(state), state.sidebarExpandedB, []);
 
-  MAppStructure([MContent(content)], []);
+  MAppStructure([content, header, sidebar], []);
 }

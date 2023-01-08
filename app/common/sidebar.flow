@@ -1,0 +1,24 @@
+import material/material2tropic;
+
+import app/state/state;
+
+export {
+  makeSidebar(state : NotildaState) -> Material;
+}
+
+makeSidebar(state : NotildaState) -> Material {
+  MSideNav(
+    MSNSmallHead([MText("Notilda", [])]),
+    MList(
+      [
+        MSingleLine("Hey there", [MOnClick(\ -> println("TSET"))]),
+        MSingleLine("Hey there", [MOnClick(\ -> println("TSET"))]),
+        MSingleLine("Hey there", [MOnClick(\ -> println("TSET"))]),
+      ],
+      [],
+      []
+    ),
+    state.sidebarExpandedB,
+    []
+  );
+}

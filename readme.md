@@ -91,4 +91,4 @@ Written with [flow9](https://github.com/area9innovation/flow9).
     - [ ] Change theme
   - [ ] Better usage of inputs in login/registration views
   - [ ] Better "to login" and "to registration" buttons
-  - [ ] Add a pop up to tell messages
+  - [ ] Add a pop up to tell messages (MFloatingContent())

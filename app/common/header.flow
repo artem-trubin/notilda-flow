@@ -1,0 +1,29 @@
+import material/material2tropic;
+
+import app/state/state;
+
+export {
+  makeHeader(state : NotildaState) -> Material;
+}
+
+makeHeader(
+  state : NotildaState,
+) -> Material {
+  title = MText("Notilda", []);
+
+  toolbar = MToolbar(
+    state.sidebarExpandedB,
+    title,
+    [],
+    []
+  );
+
+  MSelect(state.currentViewB, \currentView -> {
+    switch(currentView) {
+      ViewList(): toolbar;
+      ViewEditor(): MEmpty();
+      ViewLogin(): MEmpty();
+      ViewRegistration(): MEmpty();
+    }
+  });
+}
