@@ -12,16 +12,19 @@ makeMockNotes() -> [Note] {
       "1",
       "Wow, what a nice note",
       "Mega title",
+      "1",
     ),
     Note(
       "3",
       "This note is so so nice",
       "Incredible super title",
+      "1",
     ),
     Note(
       "4",
       "",
       "big title big title big title big titlebig title big titlebig title big title",
+      "3",
     ),
     Note(
       "5",
@@ -34,6 +37,7 @@ makeMockNotes() -> [Note] {
 
       Wow, this note is even better!",
       "",
+      "2",
     ),
   ]
 }

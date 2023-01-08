@@ -28,7 +28,12 @@ addOrUpdateNote(
   note : Note,
 ) -> void {
   notes = getValue(state.notesB);
-  newNote = if (note.id == "") Note(note with id = generateNoteId()) else note;
+  currentUser = getValue(state.currentUserB);
+  newNote = if (note.id == "") {
+    Note(note with id = generateNoteId(), authorId = currentUser.id);
+  } else {
+    note;
+  }
   newNotes = eitherFn(
     find(notes, \oldNote -> oldNote.id == newNote.id),
     \oldNote -> map(notes, \n -> if (n.id == newNote.id) newNote else n),

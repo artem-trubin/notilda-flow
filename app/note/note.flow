@@ -3,11 +3,12 @@ export {
     id : string,
     text : string,
     title : string,
+    authorId : string,
   );
 
   makeEmptyNote() -> Note;
 }
 
 makeEmptyNote() -> Note {
-  Note("", "", "");
+  Note("", "", "", "");
 }

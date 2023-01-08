@@ -51,13 +51,15 @@ Written with [flow9](https://github.com/area9innovation/flow9).
   - [x] Make login page
     - [x] Login functionality
     - [x] Login view
-  - [ ] Make registration page
-    - [ ] Registration functionality
-    - [ ] Registration view
-  - [ ] Change note's types to support authors
-  - [ ] Change mockup notes to add authors
-  - [ ] Change list view to only show notes for current author
-  - [ ] Change note creation to add current author to note
+  - [x] Make registration page
+    - [x] Registration functionality
+    - [x] Registration view
+  - [x] Change note's types to support authors
+  - [x] Change mockup notes to add authors
+  - [x] Change list view to only show notes for current author
+  - [x] Change note creation to add current author to note
+  - [ ] Some place to see the logged in user
+  - [ ] Ability to log out
 
 - [ ] Notebooks
 
@@ -89,3 +91,4 @@ Written with [flow9](https://github.com/area9innovation/flow9).
     - [ ] Change theme
   - [ ] Better usage of inputs in login/registration views
   - [ ] Better "to login" and "to registration" buttons
+  - [ ] Add a pop up to tell messages

@@ -49,12 +49,22 @@ makeViewList(
     )
   );
 
-  MSelect(state.notesB, \notes : [Note] -> {
-    MCenterX(
-      MLinesA([
-        addNoteButton,
-        makeNoteList(notes),
-      ])
-    )
-  });
+  MSelect2(
+    state.notesB,
+    state.currentUserB,
+    \notes : [Note],
+    currentUser : User -> {
+      notesForCurrentUser = filter(
+        notes,
+        \note -> note.authorId == currentUser.id
+      );
+
+      MCenterX(
+        MLinesA([
+          addNoteButton,
+          makeNoteList(notesForCurrentUser),
+        ])
+      );
+    }
+  );
 }
